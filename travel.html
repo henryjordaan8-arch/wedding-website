@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel | Maryke &amp; Henry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">M <span class="amp">&amp;</span> H</a>
+      <nav class="main-nav" id="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="details.html">Details</a></li>
+          <li><a href="accommodation.html">Accommodation</a></li>
+          <li><a href="travel.html">Travel</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="registry.html">Registry</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="rsvp.html" class="nav-rsvp">RSVP</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="padding-bottom:2rem;">
+      <p class="hero-monogram">Travel</p>
+      <h1 style="font-size:clamp(2rem,4vw,3rem);">Getting There</h1>
+      <div class="divider"><span>&#10070;</span></div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">&#9992;</div>
+            <h3>By Air</h3>
+            <p style="color:var(--text-light);">
+              The closest major airport is O.R. Tambo International Airport (JNB), about
+              <span class="todo-note">TBC</span> from Pretoria.
+              <span class="todo-note">Add flight/transfer advice here.</span>
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128663;</div>
+            <h3>By Car</h3>
+            <p style="color:var(--text-light);">
+              <span class="todo-note">Add driving directions to Venue Nouveau, Pretoria here.</span>
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128664;</div>
+            <h3>Parking</h3>
+            <p style="color:var(--text-light);">
+              <span class="todo-note">Add on-site parking info here.</span>
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128652;</div>
+            <h3>Shuttle Service</h3>
+            <p style="color:var(--text-light);">
+              <span class="todo-note">Add shuttle/transport info between hotels and the venue here, if applicable.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container" style="max-width:700px;text-align:center;">
+        <h2>Venue Location</h2>
+        <p style="color:var(--text-light);">Venue Nouveau, Pretoria, South Africa</p>
+        <div class="rsvp-form-wrap" style="padding:0;overflow:hidden;">
+          <iframe
+            title="Map to Venue Nouveau, Pretoria"
+            src="https://www.google.com/maps?q=Venue+Nouveau+Pretoria&output=embed"
+            style="min-height:400px;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-monogram">M &amp; H</p>
+    <p>20 February 2027 &middot; Venue Nouveau, Pretoria</p>
+    <p class="footer-note">We can't wait to celebrate with you.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
