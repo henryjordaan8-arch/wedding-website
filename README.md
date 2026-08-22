@@ -11,7 +11,6 @@ and JavaScript.
 | File                  | Section                              |
 |------------------------|--------------------------------------|
 | `index.html`           | Home / welcome + countdown           |
-| `our-story.html`       | Our Story                            |
 | `details.html`         | Event details & schedule             |
 | `accommodation.html`   | Accommodation suggestions            |
 | `travel.html`          | Getting there, parking, map          |
