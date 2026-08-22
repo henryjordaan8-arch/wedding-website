@@ -40,31 +40,53 @@
     </section>
 
     <section class="section" style="padding-top:0;">
-      <div class="container" style="max-width:700px;">
-        <p style="text-align:center;color:var(--text-light);">
-          <span class="todo-note">
-            Voeg jou foto's by die <code>images/gallery/</code> vouer, en vervang dan
-            elke plekhouerblok hieronder met 'n &lt;img&gt; etiket, bv.
-            &lt;img src="images/gallery/foto1.jpg" alt="Maryke en Henry"&gt;
-          </span>
-        </p>
-      </div>
-    </section>
+      <div class="container" style="max-width:480px;">
+        <div class="gallery-gate-card" id="gallery-gate">
+          <p style="text-align:center;color:var(--text-light);margin-bottom:1.6rem;">
+            Beantwoord die twee vrae om ons foto's te ontsluit.
+          </p>
+          <form id="gallery-gate-form" novalidate>
+            <label class="gate-label" for="gate-q1">Wat is Henry hulle se hond se naam?</label>
+            <input class="gate-input" type="text" id="gate-q1" autocomplete="off">
 
-    <section class="section" style="padding-top:0;">
-      <div class="container">
-        <div class="gallery-grid">
-          <div class="gallery-placeholder">Foto 1</div>
-          <div class="gallery-placeholder">Foto 2</div>
-          <div class="gallery-placeholder">Foto 3</div>
-          <div class="gallery-placeholder">Foto 4</div>
-          <div class="gallery-placeholder">Foto 5</div>
-          <div class="gallery-placeholder">Foto 6</div>
-          <div class="gallery-placeholder">Foto 7</div>
-          <div class="gallery-placeholder">Foto 8</div>
+            <label class="gate-label" for="gate-q2">Wat is Maryke hulle se hond se naam?</label>
+            <input class="gate-input" type="text" id="gate-q2" autocomplete="off">
+
+            <button type="submit" class="btn" style="width:100%;margin-top:0.5rem;">Ontsluit</button>
+            <p id="gate-error" class="gate-error" style="display:none;">Een of albei antwoorde is verkeerd &mdash; probeer weer.</p>
+          </form>
         </div>
       </div>
     </section>
+
+    <div id="gallery-content" style="display:none;">
+      <section class="section" style="padding-top:0;">
+        <div class="container" style="max-width:700px;">
+          <p style="text-align:center;color:var(--text-light);">
+            <span class="todo-note">
+              Voeg jou foto's by die <code>images/gallery/</code> vouer, en vervang dan
+              elke plekhouerblok hieronder met 'n &lt;img&gt; etiket, bv.
+              &lt;img src="images/gallery/foto1.jpg" alt="Maryke en Henry"&gt;
+            </span>
+          </p>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:0;">
+        <div class="container">
+          <div class="gallery-grid">
+            <div class="gallery-placeholder">Foto 1</div>
+            <div class="gallery-placeholder">Foto 2</div>
+            <div class="gallery-placeholder">Foto 3</div>
+            <div class="gallery-placeholder">Foto 4</div>
+            <div class="gallery-placeholder">Foto 5</div>
+            <div class="gallery-placeholder">Foto 6</div>
+            <div class="gallery-placeholder">Foto 7</div>
+            <div class="gallery-placeholder">Foto 8</div>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -74,5 +96,40 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const ANSWERS = { q1: 'frikkie', q2: 'albert' };
+      const gate = document.getElementById('gallery-gate');
+      const content = document.getElementById('gallery-content');
+      const form = document.getElementById('gallery-gate-form');
+      const error = document.getElementById('gate-error');
+
+      const unlock = () => {
+        gate.style.display = 'none';
+        content.style.display = 'block';
+      };
+
+      let alreadyUnlocked = false;
+      try {
+        alreadyUnlocked = localStorage.getItem('galleryUnlocked') === 'true';
+      } catch (err) {
+        alreadyUnlocked = false;
+      }
+      if (alreadyUnlocked) unlock();
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const a1 = document.getElementById('gate-q1').value.trim().toLowerCase();
+        const a2 = document.getElementById('gate-q2').value.trim().toLowerCase();
+        if (a1 === ANSWERS.q1 && a2 === ANSWERS.q2) {
+          error.style.display = 'none';
+          try { localStorage.setItem('galleryUnlocked', 'true'); } catch (err) { /* ignore */ }
+          unlock();
+        } else {
+          error.style.display = 'block';
+        }
+      });
+    });
+  </script>
 </body>
 </html>

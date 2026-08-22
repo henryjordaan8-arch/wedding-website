@@ -479,6 +479,47 @@ ul { list-style: none; margin: 0; padding: 0; }
   padding: 1rem;
 }
 
+/* ---------- Gallery password gate ---------- */
+.gallery-gate-card {
+  background: var(--white);
+  border: 1px solid var(--cream-deep);
+  border-radius: 6px;
+  padding: 2rem 1.8rem;
+  box-shadow: 0 8px 24px rgba(85, 37, 38, 0.08);
+}
+
+.gate-label {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.gate-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 1.3rem;
+  border: 1px solid var(--cream-deep);
+  border-radius: 3px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--cream);
+}
+
+.gate-input:focus {
+  outline: none;
+  border-color: var(--olive);
+}
+
+.gate-error {
+  color: var(--burgundy);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
 /* ---------- FAQ accordion ---------- */
 .faq-list {
   max-width: 760px;
