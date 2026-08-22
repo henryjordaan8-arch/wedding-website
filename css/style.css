@@ -1,6 +1,6 @@
 /* ===========================================================
    Maryke & Henry — Wedding Website
-   Theme: cream base, burgundy + olive accents
+   Theme: cream base, burgundy + forest green accents
    =========================================================== */
 
 :root {
@@ -10,9 +10,9 @@
   --burgundy: #722f37;
   --burgundy-dark: #551f26;
   --burgundy-light: #9a4b53;
-  --olive: #6f7650;
-  --olive-dark: #565c3d;
-  --olive-light: #939a6c;
+  --olive: #2f4f3c;
+  --olive-dark: #1f3529;
+  --olive-light: #6a8f7a;
   --text: #3b2f28;
   --text-light: #6b5f54;
   --white: #fffdf9;
