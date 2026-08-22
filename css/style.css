@@ -456,27 +456,40 @@ ul { list-style: none; margin: 0; padding: 0; }
   display: block;
 }
 
-/* ---------- Gallery ---------- */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
+/* ---------- Gallery masonry ---------- */
+.gallery-masonry {
+  column-count: 2;
+  column-gap: 0.9rem;
   margin-top: 2.5rem;
 }
 
-.gallery-placeholder {
-  aspect-ratio: 4 / 5;
-  background: linear-gradient(150deg, var(--cream-deep), var(--cream-alt));
-  border: 1px dashed var(--olive-light);
+@media (min-width: 620px) {
+  .gallery-masonry { column-count: 3; }
+}
+
+@media (min-width: 980px) {
+  .gallery-masonry { column-count: 4; }
+}
+
+.gallery-masonry a {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 0.9rem;
   border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--text-light);
-  font-family: var(--font-heading);
-  font-style: italic;
-  padding: 1rem;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(85, 37, 38, 0.1);
+}
+
+.gallery-masonry img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.gallery-masonry a:hover img {
+  transform: scale(1.03);
 }
 
 /* ---------- Gallery password gate ---------- */
