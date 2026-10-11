@@ -46,29 +46,12 @@
 
     <section class="section" style="padding-top:0;">
       <div class="container">
-
-        <!--
-          HOE OM JOU WERKLIKE GOOGLE-VORM TE KOPPEL
-          =====================================
-          1. Skep jou RSVP-vorm by https://forms.google.com
-          2. Klik "Send" (bo-regs) en kies dan die "<>" inbed-oortjie.
-          3. Kopieer die URL binne die src="..." attribuut van die <iframe> kode wat Google jou gee.
-          4. Vervang die plekhouer se src waarde hieronder met daardie URL.
-          5. Verstel indien nodig die iframe se hoogte in css/style.css (.rsvp-form-wrap iframe)
-             om by jou vorm se lengte te pas.
-        -->
         <div class="rsvp-form-wrap">
           <iframe
             title="RSVP-vorm"
-            src="about:blank"
-            data-placeholder="true"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSd_hYvq_8lLkxiH1aTIXYVORAFf2WbiiqzY2D3k9jsoE2epEw/viewform?embedded=true"
             loading="lazy">
           </iframe>
-          <div class="rsvp-placeholder-message" style="text-align:center;padding:2rem 1rem;color:var(--text-light);">
-            <p class="todo-note" style="display:inline-block;">
-              Google-vorm nog nie gekoppel nie &mdash; vervang die iframe se "src" in rsvp.html met jou vorm se inbedskakel.
-            </p>
-          </div>
         </div>
 
         <p style="text-align:center;margin-top:2rem;color:var(--text-light);">
@@ -86,18 +69,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script>
-    // Verberg die plekhouer-boodskap sodra 'n werklike vorm-URL gestel is (src is nie meer "about:blank" nie).
-    document.addEventListener('DOMContentLoaded', () => {
-      const iframe = document.querySelector('.rsvp-form-wrap iframe');
-      const message = document.querySelector('.rsvp-placeholder-message');
-      if (iframe && message && iframe.getAttribute('src') !== 'about:blank') {
-        message.style.display = 'none';
-        iframe.style.display = 'block';
-      } else if (iframe) {
-        iframe.style.display = 'none';
-      }
-    });
-  </script>
 </body>
 </html>
