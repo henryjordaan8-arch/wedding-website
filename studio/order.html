@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order your wedding website | {brand}</title>
+  <meta name="description" content="Tell us about your wedding and we'll build your website.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/studio.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" data-cfg="brandName">Ever After Sites</a>
+      <nav class="main-nav" id="main-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html#examples">Examples</a></li>
+          <li><a href="index.html#packages">Packages</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="order-wrap">
+    <section class="form-hero center">
+      <div class="container">
+        <span class="eyebrow">Your wedding website</span>
+        <h1 style="font-size:clamp(2.3rem,5vw,3.6rem);">Tell us about your day</h1>
+        <p class="lead">Everything we need to build your website. Not sure about something yet? Leave it blank &mdash; you can send it later.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:2rem;">
+      <div class="container">
+        <form class="order-form" id="order-form">
+
+          <div class="pkg-switch" role="radiogroup" aria-label="Package">
+            <div class="pkg-option">
+              <input type="radio" id="pkg-essential" name="package" value="essential" data-label="Package" checked>
+              <label for="pkg-essential"><strong>Essential &middot; <span data-cfg="essentialPrice">R1 499</span></strong><span>Our proven layout, your details. Live in ~<span data-cfg="essentialTurnaround">7 days</span>.</span></label>
+            </div>
+            <div class="pkg-option">
+              <input type="radio" id="pkg-bespoke" name="package" value="bespoke" data-label="Package">
+              <label for="pkg-bespoke"><strong>Bespoke &middot; <span data-cfg="bespokePrice">R4 999</span></strong><span>In-depth questionnaire + 3 sessions with your developer.</span></label>
+            </div>
+          </div>
+
+          <!-- ===== About you ===== -->
+          <fieldset>
+            <legend>About you</legend>
+            <div class="row">
+              <div class="field"><label for="p1">Partner 1 name <span class="req">*</span></label><input type="text" id="p1" name="partner1" data-label="Partner 1" required></div>
+              <div class="field"><label for="p2">Partner 2 name <span class="req">*</span></label><input type="text" id="p2" name="partner2" data-label="Partner 2" required></div>
+            </div>
+            <div class="row">
+              <div class="field"><label for="email">Your email <span class="req">*</span></label><input type="email" id="email" name="email" data-label="Email" required></div>
+              <div class="field"><label for="phone">WhatsApp number <span class="req">*</span></label><input type="tel" id="phone" name="phone" data-label="WhatsApp" required></div>
+            </div>
+          </fieldset>
+
+          <!-- ===== The wedding ===== -->
+          <fieldset>
+            <legend>The wedding</legend>
+            <div class="row">
+              <div class="field"><label for="date">Wedding date <span class="req">*</span></label><input type="date" id="date" name="date" data-label="Wedding date" required></div>
+              <div class="field"><label for="time">Ceremony time</label><input type="time" id="time" name="ceremony_time" data-label="Ceremony time"></div>
+            </div>
+            <div class="row">
+              <div class="field"><label for="venue">Venue name</label><input type="text" id="venue" name="venue" data-label="Venue"></div>
+              <div class="field"><label for="town">Town / city</label><input type="text" id="town" name="town" data-label="Town"></div>
+            </div>
+            <div class="field"><label for="venue_addr">Venue address or Google Maps link</label><input type="text" id="venue_addr" name="venue_address" data-label="Venue address"></div>
+            <div class="row">
+              <div class="field"><label for="dress">Dress code</label><input type="text" id="dress" name="dress_code" data-label="Dress code" placeholder="e.g. Semi-formal"></div>
+              <div class="field"><label for="rsvp_by">RSVP deadline</label><input type="date" id="rsvp_by" name="rsvp_deadline" data-label="RSVP deadline"></div>
+            </div>
+            <div class="field">
+              <label for="programme">Programme of the day<span class="hint">One item per line, e.g. &ldquo;15:30 Guests arrive&rdquo;</span></label>
+              <textarea id="programme" name="programme" data-label="Programme"></textarea>
+            </div>
+          </fieldset>
+
+          <!-- ===== Look & feel ===== -->
+          <fieldset>
+            <legend>Look &amp; wording</legend>
+            <div class="row">
+              <div class="field">
+                <label for="lang">Language</label>
+                <select id="lang" name="language" data-label="Language">
+                  <option>English</option>
+                  <option>Afrikaans</option>
+                  <option>English &amp; Afrikaans</option>
+                </select>
+              </div>
+              <div class="field"><label for="headline">Headline</label><input type="text" id="headline" name="headline" data-label="Headline" placeholder="e.g. Anna &amp; Pieter are getting married!"></div>
+            </div>
+            <div class="field">
+              <span class="label">Colour palette</span>
+              <div class="swatches">
+                <div class="swatch"><input type="radio" id="c1" name="palette" value="Burgundy & cream" data-label="Palette" checked><label for="c1"><span class="chips"><i style="background:#722f37"></i><i style="background:#f1e9d8"></i><i style="background:#2f4f3c"></i></span>Burgundy</label></div>
+                <div class="swatch"><input type="radio" id="c2" name="palette" value="Sage & ivory" data-label="Palette"><label for="c2"><span class="chips"><i style="background:#7d8f6e"></i><i style="background:#f6f3ea"></i><i style="background:#c9b48a"></i></span>Sage</label></div>
+                <div class="swatch"><input type="radio" id="c3" name="palette" value="Dusty blue & silver" data-label="Palette"><label for="c3"><span class="chips"><i style="background:#5f7a94"></i><i style="background:#eef2f5"></i><i style="background:#b8bec4"></i></span>Dusty blue</label></div>
+                <div class="swatch"><input type="radio" id="c4" name="palette" value="Blush & gold" data-label="Palette"><label for="c4"><span class="chips"><i style="background:#d9a5a0"></i><i style="background:#fbf3ef"></i><i style="background:#b8924f"></i></span>Blush</label></div>
+                <div class="swatch"><input type="radio" id="c5" name="palette" value="Terracotta & sand" data-label="Palette"><label for="c5"><span class="chips"><i style="background:#b5603f"></i><i style="background:#f5ece0"></i><i style="background:#6b5a3e"></i></span>Terracotta</label></div>
+                <div class="swatch"><input type="radio" id="c6" name="palette" value="Black & white" data-label="Palette"><label for="c6"><span class="chips"><i style="background:#1d1d1d"></i><i style="background:#ffffff"></i><i style="background:#9a9a9a"></i></span>Classic</label></div>
+              </div>
+            </div>
+            <div class="field"><label for="welcome">Welcome message<span class="hint">A few lines for the home page. Leave blank and we&rsquo;ll write one for you.</span></label><textarea id="welcome" name="welcome" data-label="Welcome message"></textarea></div>
+          </fieldset>
+
+          <!-- ===== Pages ===== -->
+          <fieldset>
+            <legend>Pages &amp; content</legend>
+            <div class="field">
+              <span class="label">Which pages would you like?</span>
+              <div class="checks">
+                <label><input type="checkbox" name="pages" value="Details & programme" data-label="Pages" checked> Details &amp; programme</label>
+                <label><input type="checkbox" name="pages" value="Venue & directions" data-label="Pages" checked> Venue &amp; directions</label>
+                <label><input type="checkbox" name="pages" value="Accommodation" data-label="Pages" checked> Accommodation</label>
+                <label><input type="checkbox" name="pages" value="Photo gallery" data-label="Pages" checked> Photo gallery</label>
+                <label><input type="checkbox" name="pages" value="Gift registry" data-label="Pages" checked> Gift registry</label>
+                <label><input type="checkbox" name="pages" value="FAQ" data-label="Pages" checked> FAQ</label>
+                <label><input type="checkbox" name="pages" value="RSVP" data-label="Pages" checked> RSVP</label>
+              </div>
+            </div>
+            <div class="field">
+              <span class="label">What should the RSVP ask?</span>
+              <div class="checks">
+                <label><input type="checkbox" name="rsvp_questions" value="Attending yes/no" data-label="RSVP questions" checked> Attending yes / no</label>
+                <label><input type="checkbox" name="rsvp_questions" value="Number of guests" data-label="RSVP questions" checked> Number of guests</label>
+                <label><input type="checkbox" name="rsvp_questions" value="Dietary requirements" data-label="RSVP questions"> Dietary requirements</label>
+                <label><input type="checkbox" name="rsvp_questions" value="Meal choice" data-label="RSVP questions"> Meal choice</label>
+                <label><input type="checkbox" name="rsvp_questions" value="Song request" data-label="RSVP questions"> Song request</label>
+                <label><input type="checkbox" name="rsvp_questions" value="Message for the couple" data-label="RSVP questions"> Message for the couple</label>
+              </div>
+            </div>
+            <div class="field"><label for="stay">Accommodation suggestions<span class="hint">Names, phone numbers, websites</span></label><textarea id="stay" name="accommodation" data-label="Accommodation"></textarea></div>
+            <div class="field"><label for="registry">Gift registry / honeymoon fund details</label><textarea id="registry" name="registry" data-label="Registry"></textarea></div>
+            <div class="field"><label for="faqs">Guest FAQs<span class="hint">Kids? Plus-ones? Parking? Cash bar?</span></label><textarea id="faqs" name="faqs" data-label="FAQs"></textarea></div>
+            <div class="field"><label for="gate">Gallery lock questions (optional)<span class="hint">e.g. &ldquo;What is our dog&rsquo;s name?&rdquo; &mdash; with the answer</span></label><input type="text" id="gate" name="gallery_lock" data-label="Gallery lock"></div>
+          </fieldset>
+
+          <!-- ===== Photos & domain ===== -->
+          <fieldset>
+            <legend>Photos &amp; web address</legend>
+            <div class="field"><label for="photos">Link to your photos<span class="hint">Google Drive, Dropbox or WeTransfer link &mdash; or send them to us on WhatsApp</span></label><input type="url" id="photos" name="photos" data-label="Photos link" placeholder="https://"></div>
+            <div class="row">
+              <div class="field"><label for="domain">Dream web address</label><input type="text" id="domain" name="domain" data-label="Domain" placeholder="annaenpieter.co.za"></div>
+              <div class="field">
+                <label for="has_domain">Do you already own it?</label>
+                <select id="has_domain" name="has_domain" data-label="Owns domain">
+                  <option>No, please help me register it</option>
+                  <option>Yes, I already have it</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- ================= BESPOKE QUESTIONNAIRE ================= -->
+          <fieldset class="bespoke-only">
+            <legend>Your story <span class="bespoke-badge">Bespoke</span></legend>
+            <p class="fs-note">The more you share, the more personal your website becomes. We&rsquo;ll go through this together in session one.</p>
+            <div class="field"><label for="met">How did you meet?</label><textarea id="met" name="how_we_met" data-label="How we met"></textarea></div>
+            <div class="field"><label for="proposal">The proposal story</label><textarea id="proposal" name="proposal" data-label="Proposal"></textarea></div>
+            <div class="field"><label for="milestones">Milestones for a &ldquo;Our story&rdquo; timeline<span class="hint">e.g. first date, first trip, moving in, the dog&hellip;</span></label><textarea id="milestones" name="milestones" data-label="Milestones"></textarea></div>
+          </fieldset>
+
+          <fieldset class="bespoke-only">
+            <legend>Style &amp; feeling <span class="bespoke-badge">Bespoke</span></legend>
+            <div class="field">
+              <span class="label">Which words describe your wedding?</span>
+              <div class="checks">
+                <label><input type="checkbox" name="vibe" value="Classic" data-label="Vibe"> Classic &amp; timeless</label>
+                <label><input type="checkbox" name="vibe" value="Romantic" data-label="Vibe"> Romantic</label>
+                <label><input type="checkbox" name="vibe" value="Rustic" data-label="Vibe"> Rustic / farm</label>
+                <label><input type="checkbox" name="vibe" value="Garden" data-label="Vibe"> Garden &amp; botanical</label>
+                <label><input type="checkbox" name="vibe" value="Modern minimal" data-label="Vibe"> Modern &amp; minimal</label>
+                <label><input type="checkbox" name="vibe" value="Boho" data-label="Vibe"> Boho</label>
+                <label><input type="checkbox" name="vibe" value="Luxurious" data-label="Vibe"> Luxurious &amp; glam</label>
+                <label><input type="checkbox" name="vibe" value="Playful" data-label="Vibe"> Fun &amp; playful</label>
+              </div>
+            </div>
+            <div class="field"><label for="colours">Your exact wedding colours<span class="hint">Describe them, or paste colour codes from your planner</span></label><input type="text" id="colours" name="exact_colours" data-label="Exact colours"></div>
+            <div class="field"><label for="invite">Link to your invitation / stationery design</label><input type="url" id="invite" name="invitation_link" data-label="Invitation link" placeholder="https://"></div>
+            <div class="field"><label for="inspo">Inspiration<span class="hint">Pinterest boards, websites or Instagram accounts you love</span></label><textarea id="inspo" name="inspiration" data-label="Inspiration"></textarea></div>
+            <div class="field"><label for="feel">When guests open your website, what should they feel? <span class="req">*</span></label><textarea id="feel" name="guest_feeling" data-label="Guest feeling" data-required></textarea></div>
+          </fieldset>
+
+          <fieldset class="bespoke-only">
+            <legend>Guests &amp; extras <span class="bespoke-badge">Bespoke</span></legend>
+            <div class="row">
+              <div class="field"><label for="guests">Approximate number of guests</label><input type="text" id="guests" name="guest_count" data-label="Guest count"></div>
+              <div class="field">
+                <label for="travel">Guests travelling from far?</label>
+                <select id="travel" name="travelling_guests" data-label="Travelling guests">
+                  <option>Mostly local</option>
+                  <option>Some from other provinces</option>
+                  <option>Many from overseas</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <span class="label">Extra pages</span>
+              <div class="checks">
+                <label><input type="checkbox" name="extra_pages" value="Our story" data-label="Extra pages"> Our story</label>
+                <label><input type="checkbox" name="extra_pages" value="Wedding party" data-label="Extra pages"> Meet the wedding party</label>
+                <label><input type="checkbox" name="extra_pages" value="Menu" data-label="Extra pages"> Menu</label>
+                <label><input type="checkbox" name="extra_pages" value="Things to do nearby" data-label="Extra pages"> Things to do nearby</label>
+                <label><input type="checkbox" name="extra_pages" value="Kids corner" data-label="Extra pages"> Kids&rsquo; corner</label>
+                <label><input type="checkbox" name="extra_pages" value="After the wedding photos" data-label="Extra pages"> Photos after the wedding</label>
+              </div>
+            </div>
+            <div class="field">
+              <span class="label">Special touches</span>
+              <div class="checks">
+                <label><input type="checkbox" name="features" value="Background music" data-label="Special features"> Background music</label>
+                <label><input type="checkbox" name="features" value="Animations" data-label="Special features"> Elegant animations</label>
+                <label><input type="checkbox" name="features" value="How well do you know us quiz" data-label="Special features"> &ldquo;How well do you know us?&rdquo; quiz</label>
+                <label><input type="checkbox" name="features" value="Seating finder" data-label="Special features"> Find-your-table seating</label>
+                <label><input type="checkbox" name="features" value="Livestream" data-label="Special features"> Livestream link</label>
+                <label><input type="checkbox" name="features" value="Guest photo uploads" data-label="Special features"> Guests upload their photos</label>
+              </div>
+            </div>
+            <div class="field"><label for="must">Must-haves &amp; absolutely-nots</label><textarea id="must" name="must_haves" data-label="Must-haves / nots"></textarea></div>
+          </fieldset>
+
+          <fieldset class="bespoke-only">
+            <legend>Your sessions <span class="bespoke-badge">Bespoke</span></legend>
+            <p class="fs-note">Three one-on-one sessions of about an hour each: dream &amp; design, first draft walkthrough, and final polish &amp; launch.</p>
+            <div class="row">
+              <div class="field">
+                <label for="format">Preferred format</label>
+                <select id="format" name="session_format" data-label="Session format">
+                  <option>Video call</option>
+                  <option>In person</option>
+                  <option>Either</option>
+                </select>
+              </div>
+              <div class="field"><label for="avail">Best days &amp; times <span class="req">*</span></label><input type="text" id="avail" name="availability" data-label="Availability" placeholder="e.g. weekday evenings, Saturday mornings" data-required></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Anything else?</legend>
+            <div class="field"><label for="other">Anything else we should know</label><textarea id="other" name="other" data-label="Other notes"></textarea></div>
+          </fieldset>
+
+          <div class="form-submit">
+            <p>We&rsquo;ll reply within 1&ndash;2 working days with your quote, deposit details and next steps.</p>
+            <button type="submit" class="btn">Send my answers</button>
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span class="brand" data-cfg="brandName">Ever After Sites</span>
+    <p>Questions? <a data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp us</a> &middot; &copy; <span data-year></span></p>
+  </footer>
+
+  <script src="js/studio.js"></script>
+</body>
+</html>
