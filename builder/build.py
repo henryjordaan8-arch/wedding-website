@@ -157,6 +157,8 @@ ICONS = {
 }
 INTROS = {"none", "envelope", "monogram", "doors", "curtain", "card"}
 PHOTO_LIMITS = {"one": 0, "few": 12, "lots": 40}
+# Options reserved for the Bespoke package (the order form locks them for Essential too)
+BESPOKE_ONLY = {"intro": {"doors", "curtain"}, "photo_amount": {"lots"}, "language": {"both"}}
 PAGE_ORDER = ["details", "venue", "accommodation", "gallery", "registry", "faq", "rsvp"]
 
 
@@ -269,6 +271,17 @@ class Site:
         w = order.get("wedding", {})
         s = order.get("style", {})
         self.p1, self.p2 = c.get("partner1", "").strip(), c.get("partner2", "").strip()
+        self.bespoke = order.get("package") == "bespoke"
+        s = dict(s)
+        if s.get("language") == "both":
+            if self.bespoke:
+                self.warn("Bilingual site requested: built in English — add the Afrikaans side by hand (Bespoke work).")
+            else:
+                self.warn("Both languages is a Bespoke option — built in English for this Essential order.")
+            s["language"] = "en"
+        if not self.bespoke and s.get("intro") in BESPOKE_ONLY["intro"]:
+            self.warn(f"'{s['intro']}' opening is Bespoke-only — used the envelope for this Essential order.")
+            s["intro"] = "envelope"
         self.t = T.get(s.get("language", "en"), T["en"])
         self.w = w
         self.s = s
@@ -279,7 +292,10 @@ class Site:
         self.date_str = nice_date(w.get("date"), self.t)
         self.place = ", ".join(x for x in [w.get("venue", "").strip(), w.get("town", "").strip()] if x)
         ph = order.get("photos") or {}
-        self.photo_amount = ph.get("amount") if ph.get("amount") in PHOTO_LIMITS else "lots"
+        self.photo_amount = ph.get("amount") if ph.get("amount") in PHOTO_LIMITS else ("lots" if self.bespoke else "few")
+        if not self.bespoke and self.photo_amount in BESPOKE_ONLY["photo_amount"]:
+            self.warn("Up to 40 photos is a Bespoke option — capped at 12 for this Essential order.")
+            self.photo_amount = "few"
         self.hero_style = ph.get("hero_style") if ph.get("hero_style") in {"framed", "full", "none"} else "framed"
         self.home_strip = bool(ph.get("home_strip"))
         if self.photo_amount == "one" and "gallery" in self.pages:
@@ -393,7 +409,7 @@ class Site:
 
     def openings_demo(self):
         """A showcase page where every opening animation can be replayed (used by the sales site)."""
-        labels = {"envelope": "Envelope", "doors": "Doors", "curtain": "Curtain", "card": "Save-the-date card", "monogram": "Monogram"}
+        labels = {"envelope": "Envelope", "card": "Save-the-date card", "monogram": "Monogram", "doors": "Grand doors (Bespoke)", "curtain": "Curtain (Bespoke)"}
         keep = self.intro
         templates, buttons = [], []
         for kind, label in labels.items():

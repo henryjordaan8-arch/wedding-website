@@ -64,6 +64,9 @@ Options from the questionnaire:
 - `photos.hero_style`: `framed` (under the names), `full` (full-screen behind the names), `none`
 - `photos.home_strip`: `true` adds a row of 4 photos under the welcome message
 
+Bespoke-only values (`doors`, `curtain`, `lots`, language `both`) are downgraded for Essential orders, with a note in
+the checklist. A bilingual Bespoke site is built in English first and the Afrikaans is added by hand.
+
 `--openings-demo` also writes `openings.html`, a page that replays every opening animation in that site's colours
 (the sales site links to the one in `sites/example-anna-pieter/`).
 

@@ -29,5 +29,10 @@ Build the site with minimal back-and-forth:
    - what you wrote or changed on the couple's behalf (so it can be confirmed in their session),
    - 3–5 suggestions for their **developer session** (Essential includes one; Bespoke includes three).
 
+Package rules: Essential (R900) gets 15 palettes, 8 lettering styles, the envelope / card / monogram openings,
+up to 12 photos, one language and 1 developer session. Bespoke-only features are the doors and curtain openings, up to 40
+photos, both languages, exact custom colours and fonts, extra pages, special features, 3 sessions and 12 months online.
+The form locks these for Essential, and `build.py` falls back (with a checklist note) if an Essential order asks for them.
+
 Bespoke orders (`"package": "bespoke"`) are built the same way as a starting point. The `bespoke` answers then
 guide hand-made changes to the generated site.

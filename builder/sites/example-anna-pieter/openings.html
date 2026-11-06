@@ -47,7 +47,7 @@
 
     <section class="section page-body">
       <div class="container center">
-        <div class="demo-buttons"><button type="button" class="btn btn-outline demo-btn" data-kind="envelope">Envelope</button><button type="button" class="btn btn-outline demo-btn" data-kind="doors">Doors</button><button type="button" class="btn btn-outline demo-btn" data-kind="curtain">Curtain</button><button type="button" class="btn btn-outline demo-btn" data-kind="card">Save-the-date card</button><button type="button" class="btn btn-outline demo-btn" data-kind="monogram">Monogram</button></div>
+        <div class="demo-buttons"><button type="button" class="btn btn-outline demo-btn" data-kind="envelope">Envelope</button><button type="button" class="btn btn-outline demo-btn" data-kind="card">Save-the-date card</button><button type="button" class="btn btn-outline demo-btn" data-kind="monogram">Monogram</button><button type="button" class="btn btn-outline demo-btn" data-kind="doors">Grand doors (Bespoke)</button><button type="button" class="btn btn-outline demo-btn" data-kind="curtain">Curtain (Bespoke)</button></div>
       </div>
     </section>
   <template id="tpl-envelope">
@@ -66,36 +66,6 @@
       </div>
       <p class="env-hint">Tap to open</p>
     </div>
-    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
-  </div>
-  </template>
-  <template id="tpl-doors">
-  <div class="opening opening-doors" id="opening-doors" aria-hidden="false">
-      <div class="opening-reveal">
-        <p class="env-small">Together with their families</p>
-        <p class="env-names">Anna <span class="amp">&amp;</span> Pieter</p>
-        <p class="env-date">10 April 2027</p>
-      </div>
-    <div class="door door-l"><span class="door-handle"></span></div>
-    <div class="door door-r"><span class="door-handle"></span></div>
-    <button type="button" class="doors-center" id="opening-open">
-      <span class="doors-mono">A<span>&amp;</span>P</span>
-      <span class="doors-hint">Tap to open</span>
-    </button>
-    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
-  </div>
-  </template>
-  <template id="tpl-curtain">
-  <div class="opening opening-curtain" id="opening-curtain" aria-hidden="false">
-      <div class="opening-reveal">
-        <p class="env-small">Together with their families</p>
-        <p class="env-names">Anna <span class="amp">&amp;</span> Pieter</p>
-        <p class="env-date">10 April 2027</p>
-      </div>
-    <div class="curtain curtain-l"></div>
-    <div class="curtain curtain-r"></div>
-    <div class="curtain-valance"></div>
-    <div class="curtain-label"><span class="doors-mono">A<span>&amp;</span>P</span></div>
     <button type="button" class="opening-skip" id="opening-skip">Skip</button>
   </div>
   </template>
@@ -127,6 +97,36 @@
       <p class="mono-names">Anna <span class="amp">&amp;</span> Pieter</p>
       <p class="mono-date">10 April 2027</p>
     </div>
+    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
+  </div>
+  </template>
+  <template id="tpl-doors">
+  <div class="opening opening-doors" id="opening-doors" aria-hidden="false">
+      <div class="opening-reveal">
+        <p class="env-small">Together with their families</p>
+        <p class="env-names">Anna <span class="amp">&amp;</span> Pieter</p>
+        <p class="env-date">10 April 2027</p>
+      </div>
+    <div class="door door-l"><span class="door-handle"></span></div>
+    <div class="door door-r"><span class="door-handle"></span></div>
+    <button type="button" class="doors-center" id="opening-open">
+      <span class="doors-mono">A<span>&amp;</span>P</span>
+      <span class="doors-hint">Tap to open</span>
+    </button>
+    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
+  </div>
+  </template>
+  <template id="tpl-curtain">
+  <div class="opening opening-curtain" id="opening-curtain" aria-hidden="false">
+      <div class="opening-reveal">
+        <p class="env-small">Together with their families</p>
+        <p class="env-names">Anna <span class="amp">&amp;</span> Pieter</p>
+        <p class="env-date">10 April 2027</p>
+      </div>
+    <div class="curtain curtain-l"></div>
+    <div class="curtain curtain-r"></div>
+    <div class="curtain-valance"></div>
+    <div class="curtain-label"><span class="doors-mono">A<span>&amp;</span>P</span></div>
     <button type="button" class="opening-skip" id="opening-skip">Skip</button>
   </div>
   </template>

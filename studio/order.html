@@ -49,11 +49,11 @@
           <div class="pkg-switch" role="radiogroup" aria-label="Package">
             <div class="pkg-option">
               <input type="radio" id="pkg-essential" name="package" value="essential" data-path="package" data-label="Package" checked>
-              <label for="pkg-essential"><strong>Essential &middot; <span data-cfg="essentialPrice">R900</span></strong><span>Our proven design, your details, plus 1 session with your developer.</span></label>
+              <label for="pkg-essential"><strong>Essential &middot; <span data-cfg="essentialPrice">R900</span></strong><span>Everything you need: our proven design, your details and 1 session with your developer.</span></label>
             </div>
             <div class="pkg-option">
               <input type="radio" id="pkg-bespoke" name="package" value="bespoke" data-path="package" data-label="Package">
-              <label for="pkg-bespoke"><strong>Bespoke &middot; <span data-cfg="bespokePrice">R1 600</span></strong><span>In-depth questionnaire + 3 sessions with your developer.</span></label>
+              <label for="pkg-bespoke"><strong>Bespoke &middot; <span data-cfg="bespokePrice">R1 600</span></strong><span>Only <b data-cfg="upgradeDiff">R700</b> more: 3 sessions, your exact colours, doors &amp; curtain openings, both languages, 40 photos, extra pages and a year online.</span></label>
             </div>
           </div>
 
@@ -122,8 +122,9 @@
             <div class="field">
               <span class="label">Language</span>
               <div class="checks">
-                <label><input type="radio" name="language" value="en" data-path="style.language" data-label="Language" checked> English</label>
-                <label><input type="radio" name="language" value="af" data-path="style.language" data-label="Language"> Afrikaans</label>
+                <label><input type="radio" id="lang-en" name="language" value="en" data-path="style.language" data-label="Language" checked> English</label>
+                <label><input type="radio" id="lang-af" name="language" value="af" data-path="style.language" data-label="Language"> Afrikaans</label>
+                <label class="locked-opt"><input type="radio" id="lang-both" name="language" value="both" data-path="style.language" data-label="Language" data-bespoke-only data-fallback="lang-en"> English &amp; Afrikaans side by side <span class="bespoke-badge">Bespoke</span></label>
               </div>
             </div>
             <div class="field">
@@ -170,8 +171,8 @@
               <span class="label">Opening animation <span class="hint" style="display:inline;">(plays once when guests first open the website)</span></span>
               <div class="font-options choice-3">
                 <div class="font-opt"><input type="radio" id="op-envelope" name="intro" value="envelope" data-path="style.intro" data-label="Opening animation" checked><label for="op-envelope"><span class="op op-env" aria-hidden="true"><i></i><em></em></span><b>Envelope</b><small>Tap the wax seal and the invitation slides out</small></label></div>
-                <div class="font-opt"><input type="radio" id="op-doors" name="intro" value="doors" data-path="style.intro" data-label="Opening animation"><label for="op-doors"><span class="op op-doors" aria-hidden="true"><i></i><i></i></span><b>Grand doors</b><small>Two doors swing open to reveal your names</small></label></div>
-                <div class="font-opt"><input type="radio" id="op-curtain" name="intro" value="curtain" data-path="style.intro" data-label="Opening animation"><label for="op-curtain"><span class="op op-curtain" aria-hidden="true"><i></i><i></i></span><b>Curtain</b><small>Curtains draw apart like the start of a show</small></label></div>
+                <div class="font-opt"><input type="radio" id="op-doors" name="intro" value="doors" data-path="style.intro" data-label="Opening animation" data-bespoke-only data-fallback="op-envelope"><label for="op-doors"><span class="op op-doors" aria-hidden="true"><i></i><i></i></span><b>Grand doors <span class="bespoke-badge">Bespoke</span></b><small>Two doors swing open to reveal your names</small></label></div>
+                <div class="font-opt"><input type="radio" id="op-curtain" name="intro" value="curtain" data-path="style.intro" data-label="Opening animation" data-bespoke-only data-fallback="op-envelope"><label for="op-curtain"><span class="op op-curtain" aria-hidden="true"><i></i><i></i></span><b>Curtain <span class="bespoke-badge">Bespoke</span></b><small>Curtains draw apart like the start of a show</small></label></div>
                 <div class="font-opt"><input type="radio" id="op-card" name="intro" value="card" data-path="style.intro" data-label="Opening animation"><label for="op-card"><span class="op op-card" aria-hidden="true"><i>S</i></span><b>Save-the-date card</b><small>A card flips over to show your invitation</small></label></div>
                 <div class="font-opt"><input type="radio" id="op-monogram" name="intro" value="monogram" data-path="style.intro" data-label="Opening animation"><label for="op-monogram"><span class="op op-mono" aria-hidden="true">A<span>&amp;</span>P</span><b>Monogram</b><small>Your initials and names gently appear</small></label></div>
                 <div class="font-opt"><input type="radio" id="op-none" name="intro" value="none" data-path="style.intro" data-label="Opening animation"><label for="op-none"><span class="op op-none" aria-hidden="true">&mdash;</span><b>None</b><small>Straight to the website</small></label></div>
@@ -282,7 +283,7 @@
               <div class="font-options choice-3">
                 <div class="font-opt"><input type="radio" id="pa-one" name="photo_amount" value="one" data-path="photos.amount" data-label="Photo amount"><label for="pa-one"><span class="ph ph-one" aria-hidden="true"><i></i></span><b>Just one or two</b><small>A favourite photo on the home page, no gallery</small></label></div>
                 <div class="font-opt"><input type="radio" id="pa-few" name="photo_amount" value="few" data-path="photos.amount" data-label="Photo amount" checked><label for="pa-few"><span class="ph ph-few" aria-hidden="true"><i></i><i></i><i></i><i></i></span><b>A small selection</b><small>Up to 12 photos in a gallery</small></label></div>
-                <div class="font-opt"><input type="radio" id="pa-lots" name="photo_amount" value="lots" data-path="photos.amount" data-label="Photo amount"><label for="pa-lots"><span class="ph ph-lots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Lots of photos</b><small>A full gallery of up to 40 photos</small></label></div>
+                <div class="font-opt"><input type="radio" id="pa-lots" name="photo_amount" value="lots" data-path="photos.amount" data-label="Photo amount" data-bespoke-only data-fallback="pa-few"><label for="pa-lots"><span class="ph ph-lots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Lots of photos <span class="bespoke-badge">Bespoke</span></b><small>Up to 40, plus your professional photos added after the wedding</small></label></div>
               </div>
             </div>
             <div class="field">

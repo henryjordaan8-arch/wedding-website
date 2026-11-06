@@ -25,6 +25,10 @@ const STUDIO = {
   formEndpoint: ''
 };
 
+// Price difference between the packages, e.g. 'R700' (shown as "only R700 more")
+const toNumber = (price) => Number(String(price).replace(/[^0-9]/g, ''));
+STUDIO.upgradeDiff = 'R' + (toNumber(STUDIO.bespokePrice) - toNumber(STUDIO.essentialPrice)).toLocaleString('en-ZA').replace(/,/g, ' ');
+
 document.addEventListener('DOMContentLoaded', () => {
   /* ---- Fill in config values ---- */
   document.querySelectorAll('[data-cfg]').forEach((el) => {
@@ -196,10 +200,40 @@ function setupOrderForm(form) {
   }
 
   const isBespoke = () => form.querySelector('input[name="package"]:checked')?.value === 'bespoke';
+  /* Options marked data-bespoke-only are locked for Essential. Tapping one offers a one-click upgrade. */
+  const locked = [...form.querySelectorAll('[data-bespoke-only]')];
+  const showUpsell = (input) => {
+    const field = input.closest('.field');
+    let note = field.querySelector('.upsell');
+    if (!note) {
+      note = document.createElement('p');
+      note.className = 'upsell';
+      note.innerHTML = `<span>&#10022; This is a <strong>Bespoke</strong> option &mdash; only ${STUDIO.upgradeDiff} more, with 3 sessions, your exact colours and much more.</span> <button type="button" class="upsell-btn">Switch to Bespoke</button>`;
+      note.querySelector('button').addEventListener('click', () => {
+        form.querySelector('input[name="package"][value="bespoke"]').checked = true;
+        syncPackage();
+        input.checked = true;
+        note.remove();
+        form.querySelector('.pkg-switch').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      field.appendChild(note);
+    }
+  };
+  locked.forEach((input) => {
+    const label = input.closest('.font-opt') || input.closest('label');
+    label.addEventListener('click', () => { if (input.disabled) showUpsell(input); });
+  });
+
   const syncPackage = () => {
     const bespoke = isBespoke();
     wrap.classList.toggle('is-bespoke', bespoke);
     form.querySelectorAll('.bespoke-only [data-required]').forEach((el) => { el.required = bespoke; });
+    locked.forEach((input) => {
+      input.disabled = !bespoke;
+      (input.closest('.font-opt') || input.closest('label')).classList.toggle('is-locked', !bespoke);
+      if (!bespoke && input.checked) document.getElementById(input.dataset.fallback).checked = true;
+    });
+    if (bespoke) form.querySelectorAll('.upsell').forEach((n) => n.remove());
   };
   form.querySelectorAll('input[name="package"]').forEach((r) => r.addEventListener('change', syncPackage));
   syncPackage();
