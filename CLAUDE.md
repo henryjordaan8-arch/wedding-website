@@ -33,6 +33,8 @@ Package rules: Essential (R900) gets 15 palettes, 8 lettering styles, the envelo
 up to 15 photos, one language and 1 developer session. Bespoke-only features are the doors and curtain openings, up to 40
 photos, both languages, exact custom colours and fonts, extra pages, special features, 3 sessions and 12 months online.
 The form locks these for Essential, and `build.py` falls back (with a checklist note) if an Essential order asks for them.
+Both packages include the couple's web address (e.g. .co.za) and hosting at our cost for as long as the package keeps the site
+online. In the report, remind the user to register the domain from `domain.name` if `domain.owned` is `no`.
 
 Bespoke orders (`"package": "bespoke"`) are built the same way as a starting point. The `bespoke` answers then
 guide hand-made changes to the generated site.
