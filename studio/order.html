@@ -7,7 +7,7 @@
   <meta name="description" content="Tell us about your wedding and we'll build your website.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600&family=Playfair+Display:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600&family=Playfair+Display:wght@600&family=Great+Vibes&family=Pinyon+Script&family=Cinzel:wght@500&family=Josefin+Sans:wght@300&family=DM+Serif+Display&family=Parisienne&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/studio.css">
 </head>
 <body>
@@ -129,21 +129,34 @@
             <div class="field">
               <span class="label">Colour palette</span>
               <div class="swatches">
-                <div class="swatch"><input type="radio" id="c0" name="palette" value="navy" data-path="style.palette" data-label="Palette" checked><label for="c0"><span class="chips"><i style="background:#1c2d4a"></i><i style="background:#f2ede2"></i><i style="background:#a88a5c"></i></span>Navy</label></div>
-                <div class="swatch"><input type="radio" id="c1" name="palette" value="burgundy" data-path="style.palette" data-label="Palette"><label for="c1"><span class="chips"><i style="background:#722f37"></i><i style="background:#f1e9d8"></i><i style="background:#2f4f3c"></i></span>Burgundy</label></div>
-                <div class="swatch"><input type="radio" id="c2" name="palette" value="sage" data-path="style.palette" data-label="Palette"><label for="c2"><span class="chips"><i style="background:#55664a"></i><i style="background:#eceee2"></i><i style="background:#b0955f"></i></span>Sage</label></div>
-                <div class="swatch"><input type="radio" id="c3" name="palette" value="dusty-blue" data-path="style.palette" data-label="Palette"><label for="c3"><span class="chips"><i style="background:#4a6580"></i><i style="background:#eaeff3"></i><i style="background:#b8bec4"></i></span>Dusty blue</label></div>
-                <div class="swatch"><input type="radio" id="c4" name="palette" value="blush" data-path="style.palette" data-label="Palette"><label for="c4"><span class="chips"><i style="background:#a45f5a"></i><i style="background:#f7ebe6"></i><i style="background:#b8924f"></i></span>Blush</label></div>
-                <div class="swatch"><input type="radio" id="c5" name="palette" value="terracotta" data-path="style.palette" data-label="Palette"><label for="c5"><span class="chips"><i style="background:#a5532f"></i><i style="background:#f2e7d9"></i><i style="background:#6b5a3e"></i></span>Terracotta</label></div>
-                <div class="swatch"><input type="radio" id="c6" name="palette" value="classic" data-path="style.palette" data-label="Palette"><label for="c6"><span class="chips"><i style="background:#1d1d1d"></i><i style="background:#f1f1ef"></i><i style="background:#8a8a8a"></i></span>Black &amp; white</label></div>
+                <div class="swatch"><input type="radio" id="pal-navy" name="palette" value="navy" data-path="style.palette" data-label="Palette" checked><label for="pal-navy"><span class="chips"><i style="background:#1c2d4a"></i><i style="background:#f2ede2"></i><i style="background:#a88a5c"></i></span>Navy</label></div>
+                <div class="swatch"><input type="radio" id="pal-emerald" name="palette" value="emerald" data-path="style.palette" data-label="Palette"><label for="pal-emerald"><span class="chips"><i style="background:#1f4d3a"></i><i style="background:#ebefe9"></i><i style="background:#b8975a"></i></span>Emerald</label></div>
+                <div class="swatch"><input type="radio" id="pal-sage" name="palette" value="sage" data-path="style.palette" data-label="Palette"><label for="pal-sage"><span class="chips"><i style="background:#55664a"></i><i style="background:#eceee2"></i><i style="background:#b0955f"></i></span>Sage</label></div>
+                <div class="swatch"><input type="radio" id="pal-olive" name="palette" value="olive" data-path="style.palette" data-label="Palette"><label for="pal-olive"><span class="chips"><i style="background:#5b5f3a"></i><i style="background:#eeebdf"></i><i style="background:#a26b48"></i></span>Olive</label></div>
+                <div class="swatch"><input type="radio" id="pal-dusty-blue" name="palette" value="dusty-blue" data-path="style.palette" data-label="Palette"><label for="pal-dusty-blue"><span class="chips"><i style="background:#4a6580"></i><i style="background:#eaeff3"></i><i style="background:#8e959c"></i></span>Dusty blue</label></div>
+                <div class="swatch"><input type="radio" id="pal-coastal" name="palette" value="coastal" data-path="style.palette" data-label="Palette"><label for="pal-coastal"><span class="chips"><i style="background:#2f6170"></i><i style="background:#e9eff0"></i><i style="background:#c9ad7f"></i></span>Coastal</label></div>
+                <div class="swatch"><input type="radio" id="pal-burgundy" name="palette" value="burgundy" data-path="style.palette" data-label="Palette"><label for="pal-burgundy"><span class="chips"><i style="background:#722f37"></i><i style="background:#f1e9d8"></i><i style="background:#2f4f3c"></i></span>Burgundy</label></div>
+                <div class="swatch"><input type="radio" id="pal-dusty-rose" name="palette" value="dusty-rose" data-path="style.palette" data-label="Palette"><label for="pal-dusty-rose"><span class="chips"><i style="background:#9b5f68"></i><i style="background:#f5eae9"></i><i style="background:#7d8a7a"></i></span>Dusty rose</label></div>
+                <div class="swatch"><input type="radio" id="pal-blush" name="palette" value="blush" data-path="style.palette" data-label="Palette"><label for="pal-blush"><span class="chips"><i style="background:#a45f5a"></i><i style="background:#f7ebe6"></i><i style="background:#b8924f"></i></span>Blush</label></div>
+                <div class="swatch"><input type="radio" id="pal-lavender" name="palette" value="lavender" data-path="style.palette" data-label="Palette"><label for="pal-lavender"><span class="chips"><i style="background:#5e4b7a"></i><i style="background:#efebf3"></i><i style="background:#a8956a"></i></span>Lavender</label></div>
+                <div class="swatch"><input type="radio" id="pal-terracotta" name="palette" value="terracotta" data-path="style.palette" data-label="Palette"><label for="pal-terracotta"><span class="chips"><i style="background:#a5532f"></i><i style="background:#f2e7d9"></i><i style="background:#6b5a3e"></i></span>Terracotta</label></div>
+                <div class="swatch"><input type="radio" id="pal-mocha" name="palette" value="mocha" data-path="style.palette" data-label="Palette"><label for="pal-mocha"><span class="chips"><i style="background:#5c4433"></i><i style="background:#efe6dc"></i><i style="background:#b08a5a"></i></span>Mocha</label></div>
+                <div class="swatch"><input type="radio" id="pal-champagne" name="palette" value="champagne" data-path="style.palette" data-label="Palette"><label for="pal-champagne"><span class="chips"><i style="background:#8a6d46"></i><i style="background:#f4ece0"></i><i style="background:#4d4a45"></i></span>Champagne</label></div>
+                <div class="swatch"><input type="radio" id="pal-black-gold" name="palette" value="black-gold" data-path="style.palette" data-label="Palette"><label for="pal-black-gold"><span class="chips"><i style="background:#1a1a1a"></i><i style="background:#f1eee7"></i><i style="background:#b4914f"></i></span>Black &amp; gold</label></div>
+                <div class="swatch"><input type="radio" id="pal-classic" name="palette" value="classic" data-path="style.palette" data-label="Palette"><label for="pal-classic"><span class="chips"><i style="background:#1d1d1d"></i><i style="background:#f1f1ef"></i><i style="background:#8a8a8a"></i></span>Black &amp; white</label></div>
               </div>
             </div>
             <div class="field">
               <span class="label">Lettering style for your names</span>
-              <div class="font-options">
-                <div class="font-opt"><input type="radio" id="f1" name="fonts" value="classic" data-path="style.fonts" data-label="Lettering" checked><label for="f1"><span style="font-family:'Playfair Display',serif;font-weight:600;">Anna &amp; Pieter</span><small>Classic</small></label></div>
-                <div class="font-opt"><input type="radio" id="f2" name="fonts" value="modern" data-path="style.fonts" data-label="Lettering"><label for="f2"><span style="font-family:'Cormorant Garamond',serif;font-weight:500;">Anna &amp; Pieter</span><small>Modern elegant</small></label></div>
-                <div class="font-opt"><input type="radio" id="f3" name="fonts" value="romantic" data-path="style.fonts" data-label="Lettering"><label for="f3"><span style="font-family:'Great Vibes',cursive;font-size:1.9rem;">Anna &amp; Pieter</span><small>Romantic script</small></label></div>
+              <div class="font-options choice-4">
+                <div class="font-opt"><input type="radio" id="font-classic" name="fonts" value="classic" data-path="style.fonts" data-label="Lettering" checked><label for="font-classic"><span style="font-family:'Playfair Display',serif;font-weight:600;">Anna &amp; Pieter</span><small>Classic</small></label></div>
+                <div class="font-opt"><input type="radio" id="font-modern" name="fonts" value="modern" data-path="style.fonts" data-label="Lettering"><label for="font-modern"><span style="font-family:'Cormorant Garamond',serif;font-weight:500;">Anna &amp; Pieter</span><small>Modern elegant</small></label></div>
+                <div class="font-opt"><input type="radio" id="font-editorial" name="fonts" value="editorial" data-path="style.fonts" data-label="Lettering"><label for="font-editorial"><span style="font-family:'DM Serif Display',serif;">Anna &amp; Pieter</span><small>Editorial</small></label></div>
+                <div class="font-opt"><input type="radio" id="font-vintage" name="fonts" value="vintage" data-path="style.fonts" data-label="Lettering"><label for="font-vintage"><span style="font-family:'Cinzel',serif;font-size:1.15rem;">Anna &amp; Pieter</span><small>Vintage</small></label></div>
+                <div class="font-opt"><input type="radio" id="font-minimal" name="fonts" value="minimal" data-path="style.fonts" data-label="Lettering"><label for="font-minimal"><span style="font-family:'Josefin Sans',sans-serif;font-weight:300;">Anna &amp; Pieter</span><small>Minimal</small></label></div>
+                <div class="font-opt"><input type="radio" id="font-romantic" name="fonts" value="romantic" data-path="style.fonts" data-label="Lettering"><label for="font-romantic"><span style="font-family:'Great Vibes',cursive;font-size:1.9rem;">Anna &amp; Pieter</span><small>Romantic script</small></label></div>
+                <div class="font-opt"><input type="radio" id="font-calligraphy" name="fonts" value="calligraphy" data-path="style.fonts" data-label="Lettering"><label for="font-calligraphy"><span style="font-family:'Pinyon Script',cursive;font-size:1.7rem;">Anna &amp; Pieter</span><small>Calligraphy</small></label></div>
+                <div class="font-opt"><input type="radio" id="font-whimsical" name="fonts" value="whimsical" data-path="style.fonts" data-label="Lettering"><label for="font-whimsical"><span style="font-family:'Parisienne',cursive;font-size:1.7rem;">Anna &amp; Pieter</span><small>Whimsical</small></label></div>
               </div>
             </div>
             <div class="field">
@@ -155,12 +168,15 @@
             </div>
             <div class="field">
               <span class="label">Opening animation <span class="hint" style="display:inline;">(plays once when guests first open the website)</span></span>
-              <div class="font-options">
-                <div class="font-opt"><input type="radio" id="o1" name="intro" value="envelope" data-path="style.intro" data-label="Opening animation" checked><label for="o1"><span class="op op-env" aria-hidden="true"><i></i><em></em></span><b>Envelope</b><small>Guests tap the wax seal and your invitation slides out</small></label></div>
-                <div class="font-opt"><input type="radio" id="o2" name="intro" value="monogram" data-path="style.intro" data-label="Opening animation"><label for="o2"><span class="op op-mono" aria-hidden="true">A<span>&amp;</span>P</span><b>Monogram</b><small>Your initials and names gently appear, then fade into the site</small></label></div>
-                <div class="font-opt"><input type="radio" id="o3" name="intro" value="none" data-path="style.intro" data-label="Opening animation"><label for="o3"><span class="op op-none" aria-hidden="true">&mdash;</span><b>None</b><small>Straight to the website</small></label></div>
+              <div class="font-options choice-3">
+                <div class="font-opt"><input type="radio" id="op-envelope" name="intro" value="envelope" data-path="style.intro" data-label="Opening animation" checked><label for="op-envelope"><span class="op op-env" aria-hidden="true"><i></i><em></em></span><b>Envelope</b><small>Tap the wax seal and the invitation slides out</small></label></div>
+                <div class="font-opt"><input type="radio" id="op-doors" name="intro" value="doors" data-path="style.intro" data-label="Opening animation"><label for="op-doors"><span class="op op-doors" aria-hidden="true"><i></i><i></i></span><b>Grand doors</b><small>Two doors swing open to reveal your names</small></label></div>
+                <div class="font-opt"><input type="radio" id="op-curtain" name="intro" value="curtain" data-path="style.intro" data-label="Opening animation"><label for="op-curtain"><span class="op op-curtain" aria-hidden="true"><i></i><i></i></span><b>Curtain</b><small>Curtains draw apart like the start of a show</small></label></div>
+                <div class="font-opt"><input type="radio" id="op-card" name="intro" value="card" data-path="style.intro" data-label="Opening animation"><label for="op-card"><span class="op op-card" aria-hidden="true"><i>S</i></span><b>Save-the-date card</b><small>A card flips over to show your invitation</small></label></div>
+                <div class="font-opt"><input type="radio" id="op-monogram" name="intro" value="monogram" data-path="style.intro" data-label="Opening animation"><label for="op-monogram"><span class="op op-mono" aria-hidden="true">A<span>&amp;</span>P</span><b>Monogram</b><small>Your initials and names gently appear</small></label></div>
+                <div class="font-opt"><input type="radio" id="op-none" name="intro" value="none" data-path="style.intro" data-label="Opening animation"><label for="op-none"><span class="op op-none" aria-hidden="true">&mdash;</span><b>None</b><small>Straight to the website</small></label></div>
               </div>
-              <p class="fs-note" style="margin:0.6rem 0 0;"><a data-cfg-href="demoEnvelope" href="#" target="_blank" rel="noopener">See the envelope</a> &middot; <a data-cfg-href="demoMonogram" href="#" target="_blank" rel="noopener">See the monogram</a></p>
+              <p class="fs-note" style="margin:0.6rem 0 0;"><a data-cfg-href="demoOpenings" href="#" target="_blank" rel="noopener">Try every opening animation &nearr;</a></p>
             </div>
             <div class="field">
               <div class="checks" style="grid-template-columns:1fr;">
@@ -261,7 +277,28 @@
           <!-- ===== 10. Photos ===== -->
           <fieldset>
             <legend>10 &middot; Photos</legend>
-            <div class="field"><label for="photos">Link to your photos<span class="hint">Google Drive, Dropbox or WeTransfer. Name your favourite one &ldquo;hero&rdquo; for the home page. 6&ndash;30 photos works best. You can also send them on WhatsApp.</span></label><input type="url" id="photos" data-path="photos.link" data-label="Photos link" placeholder="https://"></div>
+            <div class="field">
+              <span class="label">How many photos would you like on your website?</span>
+              <div class="font-options choice-3">
+                <div class="font-opt"><input type="radio" id="pa-one" name="photo_amount" value="one" data-path="photos.amount" data-label="Photo amount"><label for="pa-one"><span class="ph ph-one" aria-hidden="true"><i></i></span><b>Just one or two</b><small>A favourite photo on the home page, no gallery</small></label></div>
+                <div class="font-opt"><input type="radio" id="pa-few" name="photo_amount" value="few" data-path="photos.amount" data-label="Photo amount" checked><label for="pa-few"><span class="ph ph-few" aria-hidden="true"><i></i><i></i><i></i><i></i></span><b>A small selection</b><small>Up to 12 photos in a gallery</small></label></div>
+                <div class="font-opt"><input type="radio" id="pa-lots" name="photo_amount" value="lots" data-path="photos.amount" data-label="Photo amount"><label for="pa-lots"><span class="ph ph-lots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Lots of photos</b><small>A full gallery of up to 40 photos</small></label></div>
+              </div>
+            </div>
+            <div class="field">
+              <span class="label">Home page photo</span>
+              <div class="font-options choice-3">
+                <div class="font-opt"><input type="radio" id="hs-framed" name="hero_style" value="framed" data-path="photos.hero_style" data-label="Home photo style" checked><label for="hs-framed"><span class="hs hs-framed" aria-hidden="true"><em></em><i></i></span><b>Framed</b><small>Below your names, in an elegant frame</small></label></div>
+                <div class="font-opt"><input type="radio" id="hs-full" name="hero_style" value="full" data-path="photos.hero_style" data-label="Home photo style"><label for="hs-full"><span class="hs hs-full" aria-hidden="true"><em></em></span><b>Full-screen</b><small>Your photo fills the screen behind your names</small></label></div>
+                <div class="font-opt"><input type="radio" id="hs-none" name="hero_style" value="none" data-path="photos.hero_style" data-label="Home photo style"><label for="hs-none"><span class="hs hs-none" aria-hidden="true"><em></em></span><b>No photo</b><small>Just beautiful lettering</small></label></div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="checks" style="grid-template-columns:1fr;">
+                <label><input type="checkbox" value="yes" data-path="photos.home_strip" data-label="Home photo strip"> <span><strong>Add a strip of four photos</strong> to the home page, below the welcome message</span></label>
+              </div>
+            </div>
+            <div class="field"><label for="photos">Link to your photos<span class="hint">Google Drive, Dropbox or WeTransfer. Name your favourite one &ldquo;hero&rdquo; for the home page. Send a few more than you need and we'll pick the best. You can also send them on WhatsApp.</span></label><input type="url" id="photos" data-path="photos.link" data-label="Photos link" placeholder="https://"></div>
             <div class="repeater" data-repeat="photos.gallery_lock" data-label="Gallery lock" data-max="3">
               <span class="label">Keep the gallery private with a fun question? (optional)<span class="hint" style="display:block;font-weight:400;">Only guests who know the answer can see your photos. Answers aren't case-sensitive.</span></span>
               <div class="rep-row rep-2"><input type="text" data-key="question" placeholder="e.g. What is our dog's name?" aria-label="Question"><input type="text" data-key="answer" placeholder="Answer" aria-label="Answer"><button type="button" class="rep-remove" aria-label="Remove row">&times;</button></div>

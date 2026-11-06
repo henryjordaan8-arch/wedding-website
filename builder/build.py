@@ -40,6 +40,14 @@ PALETTES = {
     "dusty-blue": dict(bg="#f7f8f9", bg_alt="#eaeff3", bg_deep="#d5dee6", primary="#4a6580", primary_dark="#344a60", primary_light="#7590a9", secondary="#8e959c", secondary_dark="#6c737a", secondary_light="#b8bec4", text="#26313b", text_light="#5e6a75"),
     "blush":      dict(bg="#fcf7f4", bg_alt="#f7ebe6", bg_deep="#ecd6ce", primary="#a45f5a", primary_dark="#7f4440", primary_light="#d9a5a0", secondary="#b8924f", secondary_dark="#93733a", secondary_light="#dcc394", text="#3d2e2b", text_light="#76625d"),
     "terracotta": dict(bg="#faf5ee", bg_alt="#f2e7d9", bg_deep="#e5d3bd", primary="#a5532f", primary_dark="#7d3c20", primary_light="#c97c58", secondary="#6b5a3e", secondary_dark="#4f412b", secondary_light="#a4916f", text="#3a2b20", text_light="#6f5e50"),
+    "emerald":    dict(bg="#f8f6f0", bg_alt="#ebefe9", bg_deep="#d3ddd4", primary="#1f4d3a", primary_dark="#133326", primary_light="#3f7259", secondary="#b8975a", secondary_dark="#937538", secondary_light="#d9c497", text="#1f2a24", text_light="#56635b"),
+    "champagne":  dict(bg="#fbf8f2", bg_alt="#f4ece0", bg_deep="#e6d8c3", primary="#8a6d46", primary_dark="#6a5233", primary_light="#b0926a", secondary="#4d4a45", secondary_dark="#2f2d2a", secondary_light="#8e8a83", text="#2f2a24", text_light="#6b6259"),
+    "lavender":   dict(bg="#faf8fb", bg_alt="#efebf3", bg_deep="#ddd5e6", primary="#5e4b7a", primary_dark="#433557", primary_light="#8a77a6", secondary="#a8956a", secondary_dark="#84724a", secondary_light="#cdbf9b", text="#2b2433", text_light="#635a6d"),
+    "olive":      dict(bg="#f8f6ef", bg_alt="#eeebdf", bg_deep="#dcd7c3", primary="#5b5f3a", primary_dark="#414428", primary_light="#858a5c", secondary="#a26b48", secondary_dark="#7e5134", secondary_light="#cc9f80", text="#2d2e22", text_light="#64665a"),
+    "dusty-rose": dict(bg="#fcf8f7", bg_alt="#f5eae9", bg_deep="#e9d3d1", primary="#9b5f68", primary_dark="#77444c", primary_light="#c08e95", secondary="#7d8a7a", secondary_dark="#5d6a5b", secondary_light="#aab5a7", text="#3a2a2c", text_light="#745f62"),
+    "mocha":      dict(bg="#f9f5f0", bg_alt="#efe6dc", bg_deep="#dfd0bf", primary="#5c4433", primary_dark="#3f2e22", primary_light="#87695a", secondary="#b08a5a", secondary_dark="#8c6b41", secondary_light="#d4b98f", text="#2e241d", text_light="#6b5c51"),
+    "coastal":    dict(bg="#f8f8f5", bg_alt="#e9eff0", bg_deep="#d2dfe1", primary="#2f6170", primary_dark="#1f4450", primary_light="#5b8a97", secondary="#c9ad7f", secondary_dark="#a68b5e", secondary_light="#e2d2b3", text="#1f2f35", text_light="#586a70"),
+    "black-gold": dict(bg="#fbfaf7", bg_alt="#f1eee7", bg_deep="#dfd9cc", primary="#1a1a1a", primary_dark="#000000", primary_light="#444444", secondary="#b4914f", secondary_dark="#8f7036", secondary_light="#d8c08e", text="#1d1d1d", text_light="#5c5c5c"),
     "classic":    dict(bg="#fbfbfa", bg_alt="#f1f1ef", bg_deep="#dcdcd8", primary="#1d1d1d", primary_dark="#000000", primary_light="#4a4a4a", secondary="#8a8a8a", secondary_dark="#666666", secondary_light="#b5b5b5", text="#222222", text_light="#5f5f5f"),
 }
 
@@ -49,6 +57,16 @@ FONTS = {
                  "'Playfair Display', Georgia, serif", "'Lato', 'Helvetica Neue', Arial, sans-serif", "'Playfair Display', Georgia, serif"),
     "modern":   ("family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500",
                  "'Cormorant Garamond', Georgia, serif", "'Jost', 'Helvetica Neue', Arial, sans-serif", "'Cormorant Garamond', Georgia, serif"),
+    "calligraphy": ("family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Pinyon+Script&family=Lato:wght@300;400;700",
+                 "'Cormorant Garamond', Georgia, serif", "'Lato', 'Helvetica Neue', Arial, sans-serif", "'Pinyon Script', 'Cormorant Garamond', cursive"),
+    "vintage":  ("family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400",
+                 "'Cinzel', Georgia, serif", "'EB Garamond', Georgia, serif", "'Cinzel', Georgia, serif"),
+    "minimal":  ("family=Josefin+Sans:wght@300;400;600&family=Lato:wght@300;400;700",
+                 "'Josefin Sans', 'Helvetica Neue', Arial, sans-serif", "'Lato', 'Helvetica Neue', Arial, sans-serif", "'Josefin Sans', 'Helvetica Neue', Arial, sans-serif"),
+    "editorial": ("family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500",
+                 "'DM Serif Display', Georgia, serif", "'DM Sans', 'Helvetica Neue', Arial, sans-serif", "'DM Serif Display', Georgia, serif"),
+    "whimsical": ("family=Lora:ital,wght@0,500;0,600;1,500&family=Parisienne&family=Lato:wght@300;400;700",
+                 "'Lora', Georgia, serif", "'Lato', 'Helvetica Neue', Arial, sans-serif", "'Parisienne', 'Lora', cursive"),
     "romantic": ("family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Lato:wght@300;400;700",
                  "'Cormorant Garamond', Georgia, serif", "'Lato', 'Helvetica Neue', Arial, sans-serif", "'Great Vibes', 'Cormorant Garamond', cursive"),
 }
@@ -89,7 +107,7 @@ T = {
         rsvp_help="Trouble with the form? Contact us at", rsvp_whatsapp="RSVP on WhatsApp",
         whatsapp_intro="Send us your RSVP on WhatsApp &mdash; tap the button below.",
         footer_note="We can't wait to celebrate with you.",
-        invited="Together with their families", tap_open="Tap to open", skip="Skip",
+        invited="Together with their families", tap_open="Tap to open", skip="Skip", save_date="Save the date",
     ),
     "af": dict(
         lang="af", months="Januarie Februarie Maart April Mei Junie Julie Augustus September Oktober November Desember",
@@ -123,7 +141,7 @@ T = {
         rsvp_help="Sukkel met die vorm? Kontak ons by", rsvp_whatsapp="RSVP op WhatsApp",
         whatsapp_intro="Stuur vir ons jou RSVP op WhatsApp &mdash; druk die knoppie hieronder.",
         footer_note="Ons kan nie wag om saam met jou te vier nie.",
-        invited="Saam met hul families", tap_open="Tik om oop te maak", skip="Slaan oor",
+        invited="Saam met hul families", tap_open="Tik om oop te maak", skip="Slaan oor", save_date="Hou die datum oop",
     ),
 }
 
@@ -137,7 +155,8 @@ ICONS = {
     "rsvp": '<rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/>',
     "dress": '<path d="M9 3l3 3 3-3M9 3L6 6l2 3-2 12h12L16 9l2-3-3-3"/>',
 }
-INTROS = {"none", "envelope", "monogram"}
+INTROS = {"none", "envelope", "monogram", "doors", "curtain", "card"}
+PHOTO_LIMITS = {"one": 0, "few": 12, "lots": 40}
 PAGE_ORDER = ["details", "venue", "accommodation", "gallery", "registry", "faq", "rsvp"]
 
 
@@ -200,7 +219,7 @@ def rows(items, *required):
 IMG_EXT = {".jpg", ".jpeg", ".png", ".webp", ".heic"}
 
 
-def process_photos(src_dir, out_dir, warn):
+def process_photos(src_dir, out_dir, warn, max_gallery=40):
     """Return (hero, [gallery]) as lists of dicts {src, w, h}."""
     files = sorted(p for p in src_dir.glob("*") if p.suffix.lower() in IMG_EXT) if src_dir.is_dir() else []
     if not files:
@@ -223,7 +242,7 @@ def process_photos(src_dir, out_dir, warn):
 
     hero_file = next((p for p in files if p.stem.lower() == "hero"), files[0])
     hero = save(hero_file, "images/hero.jpg", 1800)
-    gallery_files = [p for p in files if p != hero_file] or [hero_file]
+    gallery_files = ([p for p in files if p != hero_file] or [hero_file])[:max_gallery]
     gallery = []
     for i, p in enumerate(gallery_files, 1):
         g = save(p, f"images/gallery/photo-{i:02d}.jpg", 1600)
@@ -259,7 +278,17 @@ class Site:
         self.pages = [p for p in PAGE_ORDER if p in (order.get("pages") or PAGE_ORDER)]
         self.date_str = nice_date(w.get("date"), self.t)
         self.place = ", ".join(x for x in [w.get("venue", "").strip(), w.get("town", "").strip()] if x)
-        self.hero, self.gallery = process_photos(photos_dir, out_dir, self.warn)
+        ph = order.get("photos") or {}
+        self.photo_amount = ph.get("amount") if ph.get("amount") in PHOTO_LIMITS else "lots"
+        self.hero_style = ph.get("hero_style") if ph.get("hero_style") in {"framed", "full", "none"} else "framed"
+        self.home_strip = bool(ph.get("home_strip"))
+        if self.photo_amount == "one" and "gallery" in self.pages:
+            self.pages.remove("gallery")
+            self.warn("Photo amount is 'one' — the gallery was left out; only the home photo is used.")
+        limit = PHOTO_LIMITS[self.photo_amount] or 4  # 'one' still keeps up to 4 for an optional home strip
+        self.hero, self.gallery = process_photos(photos_dir, out_dir, self.warn, limit)
+        if self.photo_amount != "one" and len(self.gallery) == limit:
+            self.warn(f"Gallery capped at {limit} photos (photo amount: {self.photo_amount}).")
 
     def warn(self, msg):
         self.warnings.append(msg)
@@ -299,6 +328,56 @@ class Site:
     <button type="button" class="opening-skip" id="opening-skip">{t['skip']}</button>
   </div>
 """
+        initials = f'{esc(self.p1[:1])}<span>&amp;</span>{esc(self.p2[:1])}'
+        reveal = f"""      <div class="opening-reveal">
+        <p class="env-small">{t['invited']}</p>
+        <p class="env-names">{names}</p>
+        <p class="env-date">{self.date_str}</p>
+      </div>"""
+        skip = f'    <button type="button" class="opening-skip" id="opening-skip">{t["skip"]}</button>'
+        if self.intro == "doors":
+            return f"""  <div class="opening opening-doors" id="opening" aria-hidden="false">
+{reveal}
+    <div class="door door-l"><span class="door-handle"></span></div>
+    <div class="door door-r"><span class="door-handle"></span></div>
+    <button type="button" class="doors-center" id="opening-open">
+      <span class="doors-mono">{initials}</span>
+      <span class="doors-hint">{t['tap_open']}</span>
+    </button>
+{skip}
+  </div>
+"""
+        if self.intro == "curtain":
+            return f"""  <div class="opening opening-curtain" id="opening" aria-hidden="false">
+{reveal}
+    <div class="curtain curtain-l"></div>
+    <div class="curtain curtain-r"></div>
+    <div class="curtain-valance"></div>
+    <div class="curtain-label"><span class="doors-mono">{initials}</span></div>
+{skip}
+  </div>
+"""
+        if self.intro == "card":
+            place = f'<p class="flip-place">{esc(self.place)}</p>' if self.place else ""
+            return f"""  <div class="opening opening-card" id="opening" aria-hidden="false">
+    <div class="flip">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <p class="flip-small">{t['save_date']}</p>
+          <p class="flip-mono">{initials}</p>
+          <p class="flip-small flip-dateline">{self.date_str}</p>
+        </div>
+        <div class="flip-face flip-back">
+          <p class="env-small">{t['invited']}</p>
+          <p class="env-names">{names}</p>
+          <p class="env-date">{self.date_str}</p>
+          {place}
+        </div>
+      </div>
+    </div>
+{skip}
+  </div>
+"""
         if self.intro == "monogram":
             return f"""  <div class="opening opening-monogram" id="opening" aria-hidden="false">
     <div class="mono-stage">
@@ -311,6 +390,40 @@ class Site:
   </div>
 """
         return ""
+
+    def openings_demo(self):
+        """A showcase page where every opening animation can be replayed (used by the sales site)."""
+        labels = {"envelope": "Envelope", "doors": "Doors", "curtain": "Curtain", "card": "Save-the-date card", "monogram": "Monogram"}
+        keep = self.intro
+        templates, buttons = [], []
+        for kind, label in labels.items():
+            self.intro = kind
+            overlay = self.intro_overlay().replace('id="opening"', f'id="opening-{kind}"')
+            templates.append(f'  <template id="tpl-{kind}">\n{overlay}  </template>')
+            buttons.append(f'<button type="button" class="btn btn-outline demo-btn" data-kind="{kind}">{label}</button>')
+        self.intro = keep
+        body = self.page_hero("Demo", "Opening animations", "Tap a style to play it. Each plays once when guests first open the website.") + f"""
+    <section class="section page-body">
+      <div class="container center">
+        <div class="demo-buttons">{''.join(buttons)}</div>
+      </div>
+    </section>
+{chr(10).join(templates)}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {{
+      const play = (kind) => {{
+        if (document.querySelector('.opening')) return;
+        const tpl = document.getElementById('tpl-' + kind);
+        if (!tpl) return;
+        const el = tpl.content.firstElementChild.cloneNode(true);
+        document.body.prepend(el);
+        window.runOpening(el, false);
+      }};
+      document.querySelectorAll('.demo-btn').forEach((b) => b.addEventListener('click', () => play(b.dataset.kind)));
+      if (location.hash) play(location.hash.slice(1));
+    }});
+  </script>"""
+        return self.layout("openings", "Openings", body)
 
     def layout(self, page, title, body):
         t, nav = self.t, self.t["nav"]
@@ -592,12 +705,24 @@ class Site:
         welcome = para(s.get("welcome")) or t["welcome_text"]
         time = (self.w.get("ceremony_time") or "15:00")[:5]
         target = f"{self.w.get('date')}T{time}:00+02:00"
-        photo = f'      <div class="hero-photo">\n        <img src="{self.hero["src"]}" alt="{esc(self.p1)} &amp; {esc(self.p2)}">\n      </div>\n' if self.hero else ""
+        photo, hero_cls, hero_style = "", "", ""
+        if self.hero and self.hero_style == "framed":
+            photo = f'      <div class="hero-photo">\n        <img src="{self.hero["src"]}" alt="{esc(self.p1)} &amp; {esc(self.p2)}">\n      </div>\n'
+        elif self.hero and self.hero_style == "full":
+            hero_cls = " hero-full"
+            hero_style = f' style="background-image:linear-gradient(180deg, rgba(10,10,12,0.25) 0%, rgba(10,10,12,0.55) 100%), url(\'{self.hero["src"]}\');"'
+        strip = ""
+        if self.home_strip and self.gallery:
+            pics = (self.gallery + ([self.hero] if self.hero else []))[:4]
+            imgs = "".join(f'<img src="{g["src"]}" alt="" loading="lazy">' for g in pics)
+            strip = f'\n    <div class="photo-strip{self.reveal}">{imgs}</div>\n'
+        elif self.home_strip:
+            self.warn("Home photo strip requested but there are no gallery photos.")
         countdown = "\n".join(
             f'        <div class="count-block"><span class="count-number" data-{k}>--</span><span class="count-label">{t[k]}</span></div>'
             for k in ["days", "hours", "minutes", "seconds"])
         rsvp_btn = f'      <a href="{self.href("rsvp")}" class="btn">{t["rsvp_now"]}</a>\n' if "rsvp" in self.pages else ""
-        return f"""    <section class="hero home-hero">
+        return f"""    <section class="hero home-hero{hero_cls}"{hero_style}>
       <h1 class="names" style="font-size:clamp(3rem, 6.8vw, 5.2rem);">{headline}</h1>
       <p class="tagline">{tagline}</p>
       <p class="event-line"><strong>{self.date_str}</strong>{' &middot; ' + esc(self.place) if self.place else ''}</p>
@@ -614,7 +739,7 @@ class Site:
         <p class="intro">{welcome}</p>
       </div>
     </section>
-"""
+{strip}"""
 
     def home_cards(self):
         t = self.t
@@ -695,6 +820,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("order", help="path to the client's order.json")
     ap.add_argument("--out", help="output folder (default: builder/sites/<slug>)")
+    ap.add_argument("--openings-demo", action="store_true", help="also write openings.html, a page that replays every opening animation")
     args = ap.parse_args()
 
     order_path = Path(args.order).resolve()
@@ -708,11 +834,14 @@ def main():
 
     site = Site(order, slug, out, order_path.parent / "photos")
     warnings = site.build()
+    if args.openings_demo:
+        (out / "openings.html").write_text(site.openings_demo())
 
     print(f"Built {slug} → {out.relative_to(Path.cwd()) if out.is_relative_to(Path.cwd()) else out}")
     layout = "one-page scroll" if site.single else "multi-page"
     print(f"Layout: {layout}  ·  intro: {site.intro}  ·  scroll animations: {'on' if site.animate else 'off'}")
-    print(f"Sections: {', '.join(site.pages)}  ·  photos: {len(site.gallery)}")
+    print(f"Palette: {site.s.get('palette', 'navy')}  ·  lettering: {site.s.get('fonts', 'classic')}  ·  photos: {site.photo_amount}, home photo {site.hero_style}{', photo strip' if site.home_strip else ''}")
+    print(f"Sections: {', '.join(site.pages)}  ·  gallery photos: {len(site.gallery)}")
     if warnings:
         print("\nChecklist:")
         for w in warnings:

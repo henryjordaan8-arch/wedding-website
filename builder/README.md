@@ -50,13 +50,22 @@ That checklist has anything missing from the order plus talking points for the c
 | RSVP | on-site form emailed to the couple (FormSubmit), the couple's Google Form, or WhatsApp |
 
 Options from the questionnaire:
-- `style.palette`: `navy`, `burgundy`, `sage`, `dusty-blue`, `blush`, `terracotta`, `classic`
-- `style.fonts`: `classic` (Playfair), `modern` (Cormorant), `romantic` (script names)
+- `style.palette`: `navy`, `emerald`, `sage`, `olive`, `dusty-blue`, `coastal`, `burgundy`, `dusty-rose`, `blush`,
+  `lavender`, `terracotta`, `mocha`, `champagne`, `black-gold`, `classic`
+- `style.fonts`: `classic` (Playfair), `modern` (Cormorant), `editorial` (DM Serif), `vintage` (Cinzel), `minimal` (Josefin Sans),
+  `romantic` (Great Vibes), `calligraphy` (Pinyon Script), `whimsical` (Parisienne)
 - `style.language`: `en`, `af`
 - `style.layout`: `multi` (separate pages with a menu) or `single` (one scrolling page, menu jumps to sections)
-- `style.intro`: `envelope` (tap the wax seal, the letter slides out), `monogram` (initials and names fade in) or `none`.
+- `style.intro`: `envelope` (tap the wax seal, the letter slides out), `doors` (tap, two doors swing open), `curtain`
+  (curtains draw apart), `card` (save-the-date card flips over), `monogram` (initials and names fade in) or `none`.
   It plays on the home page once per visit, and is skipped for visitors who have "reduce motion" switched on.
 - `style.animations`: `true` makes sections fade in gently as guests scroll
+- `photos.amount`: `one` (home photo only, no gallery), `few` (up to 12), `lots` (up to 40)
+- `photos.hero_style`: `framed` (under the names), `full` (full-screen behind the names), `none`
+- `photos.home_strip`: `true` adds a row of 4 photos under the welcome message
+
+`--openings-demo` also writes `openings.html`, a page that replays every opening animation in that site's colours
+(the sales site links to the one in `sites/example-anna-pieter/`).
 
 Palettes, fonts and all fixed wording (English and Afrikaans) are at the top of `build.py`. The page
 styling is in `template/style.css` and the behaviour is in `template/site.js`.

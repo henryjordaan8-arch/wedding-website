@@ -124,7 +124,10 @@
         "question": "What is our dog's name?",
         "answer": "Biscuit"
       }
-    ]
+    ],
+    "amount": "lots",
+    "hero_style": "framed",
+    "home_strip": false
   },
   "domain": {
     "name": "annaandpieter.co.za",

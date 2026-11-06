@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Openings | Anna &amp; Pieter &middot; 10 April 2027</title>
+  <meta name="description" content="Anna &amp; Pieter &middot; 10 April 2027 &middot; Oak Valley Estate, Stellenbosch">
+  <meta property="og:title" content="Anna &amp; Pieter">
+  <meta property="og:description" content="Anna &amp; Pieter &middot; 10 April 2027 &middot; Oak Valley Estate, Stellenbosch">
+  <meta property="og:image" content="images/hero.jpg">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">A <span class="amp">&amp;</span> P</a>
+      <nav class="main-nav" id="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="details.html">Details</a></li>
+          <li><a href="venue.html">Venue</a></li>
+          <li><a href="accommodation.html">Stay</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="registry.html">Registry</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="rsvp.html" class="nav-rsvp">RSVP</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero page-hero">
+      <p class="hero-monogram">Demo</p>
+      <h1>Opening animations</h1>
+      <div class="divider"><span>&#10070;</span></div>
+      <p class="intro">Tap a style to play it. Each plays once when guests first open the website.</p>
+    </section>
+
+    <section class="section page-body">
+      <div class="container center">
+        <div class="demo-buttons"><button type="button" class="btn btn-outline demo-btn" data-kind="envelope">Envelope</button><button type="button" class="btn btn-outline demo-btn" data-kind="doors">Doors</button><button type="button" class="btn btn-outline demo-btn" data-kind="curtain">Curtain</button><button type="button" class="btn btn-outline demo-btn" data-kind="card">Save-the-date card</button><button type="button" class="btn btn-outline demo-btn" data-kind="monogram">Monogram</button></div>
+      </div>
+    </section>
+  <template id="tpl-envelope">
+  <div class="opening opening-envelope" id="opening-envelope" aria-hidden="false">
+    <div class="env-stage">
+      <div class="env">
+        <div class="env-back"></div>
+        <div class="env-letter">
+          <p class="env-small">Together with their families</p>
+          <p class="env-names">Anna <span class="amp">&amp;</span> Pieter</p>
+          <p class="env-date">10 April 2027</p>
+        </div>
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+        <button type="button" class="env-seal" id="opening-open" aria-label="Tap to open">A<span>&amp;</span>P</button>
+      </div>
+      <p class="env-hint">Tap to open</p>
+    </div>
+    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
+  </div>
+  </template>
+  <template id="tpl-doors">
+  <div class="opening opening-doors" id="opening-doors" aria-hidden="false">
+      <div class="opening-reveal">
+        <p class="env-small">Together with their families</p>
+        <p class="env-names">Anna <span class="amp">&amp;</span> Pieter</p>
+        <p class="env-date">10 April 2027</p>
+      </div>
+    <div class="door door-l"><span class="door-handle"></span></div>
+    <div class="door door-r"><span class="door-handle"></span></div>
+    <button type="button" class="doors-center" id="opening-open">
+      <span class="doors-mono">A<span>&amp;</span>P</span>
+      <span class="doors-hint">Tap to open</span>
+    </button>
+    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
+  </div>
+  </template>
+  <template id="tpl-curtain">
+  <div class="opening opening-curtain" id="opening-curtain" aria-hidden="false">
+      <div class="opening-reveal">
+        <p class="env-small">Together with their families</p>
+        <p class="env-names">Anna <span class="amp">&amp;</span> Pieter</p>
+        <p class="env-date">10 April 2027</p>
+      </div>
+    <div class="curtain curtain-l"></div>
+    <div class="curtain curtain-r"></div>
+    <div class="curtain-valance"></div>
+    <div class="curtain-label"><span class="doors-mono">A<span>&amp;</span>P</span></div>
+    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
+  </div>
+  </template>
+  <template id="tpl-card">
+  <div class="opening opening-card" id="opening-card" aria-hidden="false">
+    <div class="flip">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <p class="flip-small">Save the date</p>
+          <p class="flip-mono">A<span>&amp;</span>P</p>
+          <p class="flip-small flip-dateline">10 April 2027</p>
+        </div>
+        <div class="flip-face flip-back">
+          <p class="env-small">Together with their families</p>
+          <p class="env-names">Anna <span class="amp">&amp;</span> Pieter</p>
+          <p class="env-date">10 April 2027</p>
+          <p class="flip-place">Oak Valley Estate, Stellenbosch</p>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
+  </div>
+  </template>
+  <template id="tpl-monogram">
+  <div class="opening opening-monogram" id="opening-monogram" aria-hidden="false">
+    <div class="mono-stage">
+      <p class="mono-letters">A<span>&amp;</span>P</p>
+      <span class="mono-line"></span>
+      <p class="mono-names">Anna <span class="amp">&amp;</span> Pieter</p>
+      <p class="mono-date">10 April 2027</p>
+    </div>
+    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
+  </div>
+  </template>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const play = (kind) => {
+        if (document.querySelector('.opening')) return;
+        const tpl = document.getElementById('tpl-' + kind);
+        if (!tpl) return;
+        const el = tpl.content.firstElementChild.cloneNode(true);
+        document.body.prepend(el);
+        window.runOpening(el, false);
+      };
+      document.querySelectorAll('.demo-btn').forEach((b) => b.addEventListener('click', () => play(b.dataset.kind)));
+      if (location.hash) play(location.hash.slice(1));
+    });
+  </script>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-monogram">A &amp; P</p>
+    <p>10 April 2027 &middot; Oak Valley Estate, Stellenbosch</p>
+    <p class="footer-note">We can't wait to celebrate with you.</p>
+  </footer>
+
+  <script src="js/site.js"></script>
+</body>
+</html>

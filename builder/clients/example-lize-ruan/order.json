@@ -108,7 +108,10 @@
   },
   "photos": {
     "link": "",
-    "gallery_lock": []
+    "gallery_lock": [],
+    "amount": "few",
+    "hero_style": "full",
+    "home_strip": true
   },
   "domain": {
     "name": "lizeenruan.co.za",
