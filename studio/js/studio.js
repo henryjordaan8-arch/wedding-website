@@ -14,6 +14,9 @@ const STUDIO = {
   email: 'hello@example.com',     // TODO: your business email
   whatsapp: '27000000000',        // TODO: your number in international format, no + or spaces
   liveExample: 'https://henryenmaryketrou.co.za',
+  // Demo sites made by the builder (update once client sites are hosted on their own domains)
+  demoEnvelope: '../builder/sites/example-anna-pieter/index.html',
+  demoMonogram: '../builder/sites/example-lize-ruan/index.html',
 
   // Where the order form is sent. Easiest free option:
   //   'https://formsubmit.co/ajax/your@email.com'  (send one test order, then click 'Activate' in the email)
@@ -143,6 +146,8 @@ function collectOrder(form, bespoke) {
     setPath(order, rep.dataset.repeat, items);
   });
 
+  // Single yes/no checkbox → boolean
+  if (order.style) order.style.animations = (order.style.animations || []).includes('yes');
   // FAQ rows without an answer are left off the website
   order.faqs = (order.faqs || []).filter((f) => f.q && f.a);
   return order;

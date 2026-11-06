@@ -8,6 +8,7 @@
   <meta property="og:title" content="Anna &amp; Pieter">
   <meta property="og:description" content="Anna &amp; Pieter &middot; 10 April 2027 &middot; Oak Valley Estate, Stellenbosch">
   <meta property="og:image" content="images/hero.jpg">
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -36,17 +37,17 @@
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero page-hero">
       <p class="hero-monogram">Gallery</p>
       <h1>Our Photos</h1>
       <div class="divider"><span>&#10070;</span></div>
     </section>
 
-    <section class="section" style="padding-top:0;">
-      <div class="container" style="max-width:480px;">
-        <div class="gallery-gate-card" id="gallery-gate">
-          <p style="text-align:center;margin-bottom:1.6rem;" class="muted">Answer the question(s) below to unlock our photos.</p>
+    <section class="section page-body">
+      <div class="block reveal"><div class="container">
+        <div class="gallery-gate-card" id="gallery-gate" style="max-width:480px;margin:0 auto;">
+          <p class="muted center" style="margin-bottom:1.6rem;">Answer the question(s) below to unlock our photos.</p>
           <form id="gallery-gate-form" novalidate>
             <label class="gate-label" for="gate-q1">What is our dog&#x27;s name?</label>
             <input class="gate-input" type="text" id="gate-q1" autocomplete="off" data-hash="660f2dd5a2e102002a444e862b511ac51a4dc6636a46edba79d62037c738b9f2">
@@ -54,11 +55,7 @@
             <p id="gate-error" class="gate-error" style="display:none;">One or more answers are wrong &mdash; please try again.</p>
           </form>
         </div>
-      </div>
-    </section>
-    <div id="gallery-content" style="display:none;">
-      <section class="section" style="padding-top:0;">
-        <div class="container">
+        <div id="gallery-content" style="display:none;">
           <div class="gallery-masonry">
             <a href="images/gallery/photo-01.jpg" target="_blank" rel="noopener"><img src="images/gallery/photo-01.jpg" alt="Anna &amp; Pieter" width="1067" height="1600" loading="eager" decoding="async"></a>
             <a href="images/gallery/photo-02.jpg" target="_blank" rel="noopener"><img src="images/gallery/photo-02.jpg" alt="Anna &amp; Pieter" width="1600" height="1200" loading="eager" decoding="async"></a>
@@ -67,8 +64,8 @@
             <a href="images/gallery/photo-05.jpg" target="_blank" rel="noopener"><img src="images/gallery/photo-05.jpg" alt="Anna &amp; Pieter" width="1200" height="1500" loading="lazy" decoding="async"></a>
           </div>
         </div>
-      </section>
-    </div>
+      </div></div>
+    </section>
   </main>
 
   <footer class="site-footer">

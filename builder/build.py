@@ -89,6 +89,7 @@ T = {
         rsvp_help="Trouble with the form? Contact us at", rsvp_whatsapp="RSVP on WhatsApp",
         whatsapp_intro="Send us your RSVP on WhatsApp &mdash; tap the button below.",
         footer_note="We can't wait to celebrate with you.",
+        invited="Together with their families", tap_open="Tap to open", skip="Skip",
     ),
     "af": dict(
         lang="af", months="Januarie Februarie Maart April Mei Junie Julie Augustus September Oktober November Desember",
@@ -122,6 +123,7 @@ T = {
         rsvp_help="Sukkel met die vorm? Kontak ons by", rsvp_whatsapp="RSVP op WhatsApp",
         whatsapp_intro="Stuur vir ons jou RSVP op WhatsApp &mdash; druk die knoppie hieronder.",
         footer_note="Ons kan nie wag om saam met jou te vier nie.",
+        invited="Saam met hul families", tap_open="Tik om oop te maak", skip="Slaan oor",
     ),
 }
 
@@ -135,6 +137,7 @@ ICONS = {
     "rsvp": '<rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/>',
     "dress": '<path d="M9 3l3 3 3-3M9 3L6 6l2 3-2 12h12L16 9l2-3-3-3"/>',
 }
+INTROS = {"none", "envelope", "monogram"}
 PAGE_ORDER = ["details", "venue", "accommodation", "gallery", "registry", "faq", "rsvp"]
 
 
@@ -231,6 +234,11 @@ def process_photos(src_dir, out_dir, warn):
 
 # --------------------------------------------------------------------------
 # Page building
+#
+# Every section (details, venue, ...) is produced once as a dict:
+#   {eyebrow, title, intro, html}
+# and then wrapped either as its own page (layout "multi") or stacked
+# into one long index.html (layout "single").
 # --------------------------------------------------------------------------
 class Site:
     def __init__(self, order, slug, out_dir, photos_dir):
@@ -245,6 +253,9 @@ class Site:
         self.t = T.get(s.get("language", "en"), T["en"])
         self.w = w
         self.s = s
+        self.single = s.get("layout") == "single"
+        self.intro = s.get("intro") if s.get("intro") in INTROS else "none"
+        self.animate = bool(s.get("animations"))
         self.pages = [p for p in PAGE_ORDER if p in (order.get("pages") or PAGE_ORDER)]
         self.date_str = nice_date(w.get("date"), self.t)
         self.place = ", ".join(x for x in [w.get("venue", "").strip(), w.get("town", "").strip()] if x)
@@ -253,20 +264,71 @@ class Site:
     def warn(self, msg):
         self.warnings.append(msg)
 
+    def href(self, page):
+        if self.single:
+            return "#top" if page == "index" else f"#{page}"
+        return f"{page}.html"
+
+    @property
+    def reveal(self):
+        return " reveal" if self.animate else ""
+
     # ---- shared layout ----
     def monogram(self):
         return f'{esc(self.p1[:1])} <span class="amp">&amp;</span> {esc(self.p2[:1])}'
 
+    def intro_overlay(self):
+        t = self.t
+        names = f"{esc(self.p1)} <span class=\"amp\">&amp;</span> {esc(self.p2)}"
+        if self.intro == "envelope":
+            return f"""  <div class="opening opening-envelope" id="opening" aria-hidden="false">
+    <div class="env-stage">
+      <div class="env">
+        <div class="env-back"></div>
+        <div class="env-letter">
+          <p class="env-small">{t['invited']}</p>
+          <p class="env-names">{names}</p>
+          <p class="env-date">{self.date_str}</p>
+        </div>
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+        <button type="button" class="env-seal" id="opening-open" aria-label="{t['tap_open']}">{esc(self.p1[:1])}<span>&amp;</span>{esc(self.p2[:1])}</button>
+      </div>
+      <p class="env-hint">{t['tap_open']}</p>
+    </div>
+    <button type="button" class="opening-skip" id="opening-skip">{t['skip']}</button>
+  </div>
+"""
+        if self.intro == "monogram":
+            return f"""  <div class="opening opening-monogram" id="opening" aria-hidden="false">
+    <div class="mono-stage">
+      <p class="mono-letters">{esc(self.p1[:1])}<span>&amp;</span>{esc(self.p2[:1])}</p>
+      <span class="mono-line"></span>
+      <p class="mono-names">{names}</p>
+      <p class="mono-date">{self.date_str}</p>
+    </div>
+    <button type="button" class="opening-skip" id="opening-skip">{t['skip']}</button>
+  </div>
+"""
+        return ""
+
     def layout(self, page, title, body):
         t, nav = self.t, self.t["nav"]
         rsvp_cls = ' class="nav-rsvp"'
-        links = [("index", "index.html")] + [(p, f"{p}.html") for p in self.pages]
+        links = [("index", self.href("index"))] + [(p, self.href(p)) for p in self.pages]
         items = "\n".join(
             f'          <li><a href="{href}"{rsvp_cls if key == "rsvp" else ""}>{nav[key]}</a></li>'
             for key, href in links)
         fq, fh, fb, fn = FONTS.get(self.s.get("fonts"), FONTS["classic"])
         names = f"{esc(self.p1)} &amp; {esc(self.p2)}"
         desc = f"{names} &middot; {self.date_str}" + (f" &middot; {esc(self.place)}" if self.place else "")
+        intro = self.intro_overlay() if page == "index" else ""
+        # Runs before paint: enables reveal animations and hides the intro if already seen this visit
+        head_js = "document.documentElement.classList.add('js');"
+        if intro:
+            head_js += ("try{if(sessionStorage.getItem('openingSeen')||matchMedia('(prefers-reduced-motion: reduce)').matches)"
+                        "document.documentElement.classList.add('opening-seen')}catch(e){}")
+        body_cls = ' class="one-page"' if self.single else ""
         return f"""<!DOCTYPE html>
 <html lang="{t['lang']}">
 <head>
@@ -277,16 +339,17 @@ class Site:
   <meta property="og:title" content="{names}">
   <meta property="og:description" content="{desc}">
   {'<meta property="og:image" content="images/hero.jpg">' if self.hero else ''}
+  <script>{head_js}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?{fq}&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-
+<body{body_cls}>
+{intro}
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="logo">{self.monogram()}</a>
+      <a href="{self.href('index')}" class="logo">{self.monogram()}</a>
       <nav class="main-nav" id="main-nav">
         <ul>
 {items}
@@ -298,7 +361,7 @@ class Site:
     </div>
   </header>
 
-  <main>
+  <main id="top">
 {body}
   </main>
 
@@ -313,12 +376,13 @@ class Site:
 </html>
 """
 
-    def page_hero(self, eyebrow, title, extra=""):
+    def page_hero(self, eyebrow, title, intro=""):
+        intro = f'      <p class="intro">{intro}</p>\n' if intro else ""
         return f"""    <section class="hero page-hero">
       <p class="hero-monogram">{eyebrow}</p>
       <h1>{title}</h1>
       <div class="divider"><span>&#10070;</span></div>
-{extra}    </section>
+{intro}    </section>
 """
 
     def info_strip(self):
@@ -333,114 +397,57 @@ class Site:
             for a, b in items)
         return f'    <div class="info-strip">\n{inner}\n    </div>\n'
 
-    # ---- pages ----
-    def index(self):
-        t, s = self.t, self.s
-        headline = esc(s.get("headline")) or f'{esc(self.p1)} <span class="names-amp">{t["and_word"]}</span> {esc(self.p2)}'
-        tagline = esc(s.get("tagline")) or t["tagline"]
-        welcome = para(s.get("welcome")) or t["welcome_text"]
-        time = (self.w.get("ceremony_time") or "15:00")[:5]
-        target = f"{self.w.get('date')}T{time}:00+02:00"
-        photo = f'      <div class="hero-photo">\n        <img src="{self.hero["src"]}" alt="{esc(self.p1)} &amp; {esc(self.p2)}">\n      </div>\n' if self.hero else ""
-        countdown = "\n".join(
-            f'        <div class="count-block"><span class="count-number" data-{k}>--</span><span class="count-label">{t[k]}</span></div>'
-            for k in ["days", "hours", "minutes", "seconds"])
-        rsvp_btn = f'      <a href="rsvp.html" class="btn">{t["rsvp_now"]}</a>\n' if "rsvp" in self.pages else ""
-        cards = "\n".join(
-            f'          <a href="{p}.html" class="card"><div class="card-icon">{svg(p)}</div><h3>{t["nav"][p]}</h3><p class="muted" style="font-size:0.95rem;">{t["cards"][p]}</p></a>'
-            for p in self.pages)
-        body = f"""    <section class="hero">
-      <h1 class="names" style="font-size:clamp(3rem, 6.8vw, 5.2rem);">{headline}</h1>
-      <p class="tagline">{tagline}</p>
-      <p class="event-line"><strong>{self.date_str}</strong>{' &middot; ' + esc(self.place) if self.place else ''}</p>
-{photo}      <div class="countdown" id="countdown" data-target="{target}" aria-label="{t['countdown']}">
-{countdown}
-      </div>
-{rsvp_btn}    </section>
+    def block(self, inner, width=None, extra_cls=""):
+        style = f' style="max-width:{width};"' if width else ""
+        return f'      <div class="block{self.reveal}{extra_cls}"><div class="container"{style}>\n{inner}\n      </div></div>\n'
 
-{self.info_strip()}
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title" style="text-align:center;">{t['welcome']}</h2>
-        <div class="divider"><span>&#10070;</span></div>
-        <p class="intro">{welcome}</p>
-      </div>
-    </section>
-
-    <section class="section section-alt">
-      <div class="container">
-        <div class="card-grid">
-{cards}
-        </div>
-      </div>
-    </section>"""
-        return self.layout("index", "", body)
-
-    def details(self):
+    # ---- sections ----
+    def sec_details(self):
         t = self.t
         prog = rows(self.o.get("programme"), "title")
         if not prog:
-            self.warn("Programme is empty — the Details page will show no timeline.")
-        items = "\n".join(
-            f"""          <div class="timeline-item">
-            <span class="timeline-time">{esc(i.get('time'))}</span>
-            <h3>{esc(i.get('title'))}</h3>{f'''
-            <p class="muted">{para(i.get('note'))}</p>''' if i.get('note') else ''}
-          </div>""" for i in prog)
-        timeline = f"""    <section class="section">
-      <div class="container" style="max-width:760px;">
-        <h2 class="section-title" style="text-align:center;">{t['programme']}</h2>
-        <div class="divider"><span>&#10070;</span></div>
-        <div class="timeline">
-{items}
-        </div>
-      </div>
-    </section>
-""" if prog else ""
+            self.warn("Programme is empty — the Details section will show no timeline.")
+        out = ""
+        if prog:
+            items = "\n".join(
+                f'          <div class="timeline-item"><span class="timeline-time">{esc(i.get("time"))}</span><h3>{esc(i.get("title"))}</h3>'
+                + (f'<p class="muted">{para(i.get("note"))}</p>' if i.get("note") else "") + "</div>"
+                for i in prog)
+            out += self.block(f'        <h2 class="section-title center">{t["programme"]}</h2>\n'
+                              f'        <div class="timeline">\n{items}\n        </div>', "760px")
         cards = []
         if self.w.get("dress_code") or self.w.get("dress_notes"):
-            cards.append(f'<div class="card"><div class="card-icon">{svg("dress")}</div><h3>{t["dress"]}</h3><p class="muted notes">{esc(self.w.get("dress_code"))}{"<br>" + para(self.w.get("dress_notes")) if self.w.get("dress_notes") else ""}</p></div>')
+            notes = "<br>" + para(self.w.get("dress_notes")) if self.w.get("dress_notes") else ""
+            cards.append(f'<div class="card"><div class="card-icon">{svg("dress")}</div><h3>{t["dress"]}</h3><p class="muted">{esc(self.w.get("dress_code"))}{notes}</p></div>')
         if self.w.get("reception_venue"):
             cards.append(f'<div class="card"><div class="card-icon">{svg("venue")}</div><h3>{t["reception"]}</h3><p class="muted">{para(self.w.get("reception_venue"))}</p></div>')
-        extra = f"""    <section class="section section-alt">
-      <div class="container">
-        <div class="card-grid" style="max-width:800px;margin-left:auto;margin-right:auto;">
-          {'''
-          '''.join(cards)}
-        </div>
-      </div>
-    </section>
-""" if cards else ""
-        body = self.page_hero(t["details_eyebrow"], t["details_title"]) + "\n" + self.info_strip() + "\n" + timeline + extra
-        return self.layout("details", t["nav"]["details"], body)
+        if cards:
+            out += self.block('        <div class="card-grid">\n          ' + "\n          ".join(cards) + "\n        </div>", "800px")
+        return dict(eyebrow=t["details_eyebrow"], title=t["details_title"], intro="", html=out)
 
-    def venue(self):
+    def sec_venue(self):
         t, w = self.t, self.w
         query = w.get("address") or self.place
         if not query:
             self.warn("No venue name or address — the map can't be shown.")
-        maps = query if str(query).startswith("http") else f"https://www.google.com/maps/search/?api=1&query={html.escape(re.sub(' ', '+', query or ''))}"
-        embed_q = self.place if str(query).startswith("http") else query
-        embed = f"https://www.google.com/maps?q={html.escape(re.sub(' ', '+', embed_q or ''))}&output=embed"
-        town = f'      <p class="tagline">{esc(w.get("town"))}</p>\n' if w.get("town") else ""
-        address = esc(w.get("address")) if w.get("address") and not str(w.get("address")).startswith("http") else ""
-        body = self.page_hero(t["venue_eyebrow"], esc(w.get("venue")) or t["nav"]["venue"], town) + f"""
-    <section class="section" style="padding-top:0;">
-      <div class="container" style="max-width:700px;text-align:center;">
-        <div class="rsvp-form-wrap map-wrap">
+        is_link = str(query).startswith("http")
+        maps = query if is_link else "https://www.google.com/maps/search/?api=1&query=" + html.escape((query or "").replace(" ", "+"))
+        embed_q = self.place if is_link else query
+        embed = "https://www.google.com/maps?q=" + html.escape((embed_q or "").replace(" ", "+")) + "&output=embed"
+        address = esc(w.get("address")) if w.get("address") and not is_link else ""
+        inner = f"""        <div class="rsvp-form-wrap map-wrap">
           <iframe title="{t['map_title']} {esc(w.get('venue'))}" src="{embed}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         {f'<p class="venue-address">{address}</p>' if address else ''}
-        <p style="margin-top:1.5rem;"><a class="btn btn-outline" href="{maps}" target="_blank" rel="noopener">{t['map_open']}</a></p>
-      </div>
-    </section>"""
-        return self.layout("venue", t["nav"]["venue"], body)
+        <p class="center" style="margin-top:1.5rem;"><a class="btn btn-outline" href="{maps}" target="_blank" rel="noopener">{t['map_open']}</a></p>"""
+        title = esc(w.get("venue")) or t["nav"]["venue"]
+        return dict(eyebrow=t["venue_eyebrow"], title=title, intro=esc(w.get("town")), html=self.block(inner, "700px", " center"))
 
-    def accommodation(self):
+    def sec_accommodation(self):
         t = self.t
         places = rows(self.o.get("accommodation"), "name")
         if not places:
-            self.warn("No accommodation listed — consider removing the Stay page or adding places.")
+            self.warn("No accommodation listed — consider removing the Stay section or adding places.")
         cards = []
         for p in places:
             lines = []
@@ -453,24 +460,13 @@ class Site:
             web = p.get("website", "").strip()
             if web and not web.startswith("http"):
                 web = "https://" + web
-            btn = f'\n            <a href="{esc(web)}" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:0.5rem;">{t["book"]}</a>' if web else ""
-            cards.append(f"""          <div class="card">
-            <div class="card-icon">{svg('accommodation')}</div>
-            <h3>{esc(p['name'])}</h3>
-            <p class="muted">{'<br>'.join(lines)}</p>{btn}
-          </div>""")
-        body = self.page_hero(t["stay_eyebrow"], t["stay_title"]) + f"""
-    <section class="section" style="padding-top:0;">
-      <div class="container">
-        <p class="intro" style="margin-bottom:3rem;">{t['stay_intro'].format(venue=esc(self.w.get('venue')) or esc(self.place))}</p>
-        <div class="card-grid">
-{chr(10).join(cards)}
-        </div>
-      </div>
-    </section>"""
-        return self.layout("accommodation", t["nav"]["accommodation"], body)
+            btn = f'<a href="{esc(web)}" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:0.5rem;">{t["book"]}</a>' if web else ""
+            cards.append(f'          <div class="card"><div class="card-icon">{svg("accommodation")}</div><h3>{esc(p["name"])}</h3><p class="muted">{"<br>".join(lines)}</p>{btn}</div>')
+        intro = t["stay_intro"].format(venue=esc(self.w.get("venue")) or esc(self.place))
+        return dict(eyebrow=t["stay_eyebrow"], title=t["stay_title"], intro=intro,
+                    html=self.block('        <div class="card-grid">\n' + "\n".join(cards) + "\n        </div>"))
 
-    def gallery_page(self):
+    def sec_gallery(self):
         t = self.t
         lock = rows((self.o.get("photos") or {}).get("gallery_lock"), "question", "answer")
         if not self.gallery:
@@ -480,95 +476,58 @@ class Site:
             imgs = "\n".join(
                 f'            <a href="{g["src"]}" target="_blank" rel="noopener"><img src="{g["src"]}" alt="{esc(self.p1)} &amp; {esc(self.p2)}"'
                 + (f' width="{g["w"]}" height="{g["h"]}"' if g["w"] else "")
-                + f' loading="{"eager" if i < 4 else "lazy"}" decoding="async"></a>'
+                + f' loading="{"eager" if i < 4 and not self.single else "lazy"}" decoding="async"></a>'
                 for i, g in enumerate(self.gallery))
             grid = f'<div class="gallery-masonry">\n{imgs}\n          </div>'
-        content = f"""    <div id="gallery-content"{' style="display:none;"' if lock else ''}>
-      <section class="section" style="padding-top:0;">
-        <div class="container">
-          {grid}
-        </div>
-      </section>
-    </div>"""
         gate = ""
         if lock:
             qs = "\n".join(
                 f'            <label class="gate-label" for="gate-q{i}">{esc(q["question"])}</label>\n'
                 f'            <input class="gate-input" type="text" id="gate-q{i}" autocomplete="off" data-hash="{sha(q["answer"])}">'
                 for i, q in enumerate(lock, 1))
-            gate = f"""    <section class="section" style="padding-top:0;">
-      <div class="container" style="max-width:480px;">
-        <div class="gallery-gate-card" id="gallery-gate">
-          <p style="text-align:center;margin-bottom:1.6rem;" class="muted">{t['gate_intro']}</p>
+            gate = f"""        <div class="gallery-gate-card" id="gallery-gate" style="max-width:480px;margin:0 auto;">
+          <p class="muted center" style="margin-bottom:1.6rem;">{t['gate_intro']}</p>
           <form id="gallery-gate-form" novalidate>
 {qs}
             <button type="submit" class="btn" style="width:100%;margin-top:0.5rem;">{t['unlock']}</button>
             <p id="gate-error" class="gate-error" style="display:none;">{t['gate_error']}</p>
           </form>
         </div>
-      </div>
-    </section>
 """
-        body = self.page_hero(t["gallery_eyebrow"], t["gallery_title"]) + "\n" + gate + content
-        return self.layout("gallery", t["nav"]["gallery"], body)
+        content = f'        <div id="gallery-content"{" style=\"display:none;\"" if lock else ""}>\n          {grid}\n        </div>'
+        return dict(eyebrow=t["gallery_eyebrow"], title=t["gallery_title"], intro="", html=self.block(gate + content))
 
-    def registry(self):
+    def sec_registry(self):
         t = self.t
         reg = self.o.get("registry") or {}
-        links = rows(reg.get("links"), "url")
         cards = []
-        for l in links:
+        for l in rows(reg.get("links"), "url"):
             url = l["url"].strip()
             if not url.startswith("http"):
                 url = "https://" + url
-            cards.append(f"""          <div class="card">
-            <div class="card-icon">{svg('registry')}</div>
-            <h3>{esc(l.get('title')) or t['nav']['registry']}</h3>
-            <a href="{esc(url)}" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:0.5rem;">{t['view_registry']}</a>
-          </div>""")
+            cards.append(f'          <div class="card"><div class="card-icon">{svg("registry")}</div><h3>{esc(l.get("title")) or t["nav"]["registry"]}</h3>'
+                         f'<a href="{esc(url)}" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:0.5rem;">{t["view_registry"]}</a></div>')
         if reg.get("bank_details"):
-            cards.append(f"""          <div class="card">
-            <div class="card-icon">{svg('registry')}</div>
-            <h3>{t['contribute']}</h3>
-            <p class="muted">{para(reg['bank_details'])}</p>
-          </div>""")
+            cards.append(f'          <div class="card"><div class="card-icon">{svg("registry")}</div><h3>{t["contribute"]}</h3><p class="muted">{para(reg["bank_details"])}</p></div>')
         if not cards:
-            self.warn("Registry page has no links or bank details.")
+            self.warn("Registry section has no links or bank details.")
         width = "420px" if len(cards) == 1 else "800px"
-        body = self.page_hero(t["registry_eyebrow"], t["registry_title"]) + f"""
-    <section class="section" style="padding-top:0;">
-      <div class="container">
-        <p class="intro" style="margin-bottom:3rem;">{para(reg.get('message')) or t['registry_text']}</p>
-        <div class="card-grid" style="max-width:{width};margin-left:auto;margin-right:auto;">
-{chr(10).join(cards)}
-        </div>
-      </div>
-    </section>"""
-        return self.layout("registry", t["nav"]["registry"], body)
+        return dict(eyebrow=t["registry_eyebrow"], title=t["registry_title"], intro=para(reg.get("message")) or t["registry_text"],
+                    html=self.block('        <div class="card-grid">\n' + "\n".join(cards) + "\n        </div>", width))
 
-    def faq(self):
+    def sec_faq(self):
         t = self.t
         faqs = rows(self.o.get("faqs"), "q", "a")
         if not faqs:
-            self.warn("No FAQs with answers — consider removing the FAQ page.")
+            self.warn("No FAQs with answers — consider removing the FAQ section.")
         items = "\n".join(f"""          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              <span>{esc(f['q'])}</span>
-              <span class="faq-icon">+</span>
-            </button>
+            <button class="faq-question" aria-expanded="false"><span>{esc(f['q'])}</span><span class="faq-icon">+</span></button>
             <div class="faq-answer"><p>{para(f['a'])}</p></div>
           </div>""" for f in faqs)
-        body = self.page_hero(t["faq_eyebrow"], t["faq_title"]) + f"""
-    <section class="section" style="padding-top:0;">
-      <div class="container">
-        <div class="faq-list">
-{items}
-        </div>
-      </div>
-    </section>"""
-        return self.layout("faq", t["nav"]["faq"], body)
+        return dict(eyebrow=t["faq_eyebrow"], title=t["faq_title"], intro="",
+                    html=self.block(f'        <div class="faq-list">\n{items}\n        </div>'))
 
-    def rsvp(self):
+    def sec_rsvp(self):
         t = self.t
         r = self.o.get("rsvp") or {}
         c = self.o.get("couple") or {}
@@ -589,7 +548,8 @@ class Site:
         elif method == "whatsapp":
             if not wa:
                 self.warn("RSVP by WhatsApp chosen but no phone number given.")
-            inner = f'        <p class="intro">{t["whatsapp_intro"]}</p>\n        <p style="text-align:center;margin-top:1.5rem;"><a class="btn" href="https://wa.me/{wa}?text=RSVP%20-%20" target="_blank" rel="noopener">{t["rsvp_whatsapp"]}</a></p>'
+            inner = (f'        <p class="intro">{t["whatsapp_intro"]}</p>\n'
+                     f'        <p class="center" style="margin-top:1.5rem;"><a class="btn" href="https://wa.me/{wa}?text=RSVP%20-%20" target="_blank" rel="noopener">{t["rsvp_whatsapp"]}</a></p>')
         else:
             if method == "google_form":
                 self.warn("Google Form chosen but no form link given — using the built-in RSVP form instead.")
@@ -600,9 +560,10 @@ class Site:
                 self.warn(f"RSVP emails go to {email} via FormSubmit: send one test RSVP, then the couple must click 'Activate' in the email FormSubmit sends them.")
             qs = set(r.get("questions") or ["guests", "dietary"])
             names = f"{self.p1} & {self.p2}"
-            f = []
-            f.append(f'<div class="field"><label for="r-name">{t["f_name"]}</label><input type="text" id="r-name" name="{t["f_name"]}" required></div>')
-            f.append(f'<div class="field"><span class="label">{t["f_attending"]}</span><div class="choice-row"><label><input type="radio" name="{t["f_attending"]}" value="{t["f_yes"]}" required> {t["f_yes"]}</label><label><input type="radio" name="{t["f_attending"]}" value="{t["f_no"]}"> {t["f_no"]}</label></div></div>')
+            f = [
+                f'<div class="field"><label for="r-name">{t["f_name"]}</label><input type="text" id="r-name" name="{t["f_name"]}" required></div>',
+                f'<div class="field"><span class="label">{t["f_attending"]}</span><div class="choice-row"><label><input type="radio" name="{t["f_attending"]}" value="{t["f_yes"]}" required> {t["f_yes"]}</label><label><input type="radio" name="{t["f_attending"]}" value="{t["f_no"]}"> {t["f_no"]}</label></div></div>',
+            ]
             if "guests" in qs:
                 f.append(f'<div class="field"><label for="r-guests">{t["f_guests"]}</label><input type="number" id="r-guests" name="{t["f_guests"]}" min="1" max="10" value="1"></div>')
             f.append(f'<div class="field"><label for="r-phone">{t["f_phone"]}</label><input type="tel" id="r-phone" name="{t["f_phone"]}"></div>')
@@ -611,26 +572,70 @@ class Site:
                     field = f'<textarea id="r-{key}" name="{t[label]}"></textarea>' if tag == "textarea" else f'<input type="text" id="r-{key}" name="{t[label]}">'
                     f.append(f'<div class="field"><label for="r-{key}">{t[label]}</label>{field}</div>')
             endpoint = f"https://formsubmit.co/ajax/{email}" if email else ""
+            fields = "\n          ".join(f)
             inner = f"""        <form class="rsvp-card" id="rsvp-form" data-endpoint="{esc(endpoint)}" data-whatsapp="{wa}"
               data-sending="{t['sending']}" data-thanks="{t['thanks']}" data-fallback="{t['fallback']}" data-error="{t['error']}">
           <input type="hidden" name="_subject" value="RSVP — {esc(names)}">
           <input type="hidden" name="_template" value="table">
-          {'''
-          '''.join(f)}
+          {fields}
           <button type="submit" class="btn" style="width:100%;">{t['f_send']}</button>
           <p class="rsvp-status" id="rsvp-status" role="status" aria-live="polite"></p>
         </form>
 {help_line}"""
-        extra = f'      <p class="intro">{intro}</p>\n'
-        body = self.page_hero(t["rsvp_eyebrow"], t["rsvp_title"], extra) + f"""
-    <section class="section" style="padding-top:0;">
+        return dict(eyebrow=t["rsvp_eyebrow"], title=t["rsvp_title"], intro=intro, html=self.block(inner))
+
+    # ---- home ----
+    def home_top(self):
+        t, s = self.t, self.s
+        headline = esc(s.get("headline")) or f'{esc(self.p1)} <span class="names-amp">{t["and_word"]}</span> {esc(self.p2)}'
+        tagline = esc(s.get("tagline")) or t["tagline"]
+        welcome = para(s.get("welcome")) or t["welcome_text"]
+        time = (self.w.get("ceremony_time") or "15:00")[:5]
+        target = f"{self.w.get('date')}T{time}:00+02:00"
+        photo = f'      <div class="hero-photo">\n        <img src="{self.hero["src"]}" alt="{esc(self.p1)} &amp; {esc(self.p2)}">\n      </div>\n' if self.hero else ""
+        countdown = "\n".join(
+            f'        <div class="count-block"><span class="count-number" data-{k}>--</span><span class="count-label">{t[k]}</span></div>'
+            for k in ["days", "hours", "minutes", "seconds"])
+        rsvp_btn = f'      <a href="{self.href("rsvp")}" class="btn">{t["rsvp_now"]}</a>\n' if "rsvp" in self.pages else ""
+        return f"""    <section class="hero home-hero">
+      <h1 class="names" style="font-size:clamp(3rem, 6.8vw, 5.2rem);">{headline}</h1>
+      <p class="tagline">{tagline}</p>
+      <p class="event-line"><strong>{self.date_str}</strong>{' &middot; ' + esc(self.place) if self.place else ''}</p>
+{photo}      <div class="countdown" id="countdown" data-target="{target}" aria-label="{t['countdown']}">
+{countdown}
+      </div>
+{rsvp_btn}    </section>
+
+{self.info_strip()}
+    <section class="section{self.reveal}">
       <div class="container">
-{inner}
+        <h2 class="section-title center">{t['welcome']}</h2>
+        <div class="divider"><span>&#10070;</span></div>
+        <p class="intro">{welcome}</p>
+      </div>
+    </section>
+"""
+
+    def home_cards(self):
+        t = self.t
+        cards = "\n".join(
+            f'          <a href="{p}.html" class="card"><div class="card-icon">{svg(p)}</div><h3>{t["nav"][p]}</h3><p class="muted" style="font-size:0.95rem;">{t["cards"][p]}</p></a>'
+            for p in self.pages)
+        return f"""
+    <section class="section section-alt">
+      <div class="container">
+        <div class="card-grid{self.reveal}">
+{cards}
+        </div>
       </div>
     </section>"""
-        return self.layout("rsvp", t["nav"]["rsvp"], body)
 
     # ---- build ----
+    def sections(self):
+        makers = {"details": self.sec_details, "venue": self.sec_venue, "accommodation": self.sec_accommodation,
+                  "gallery": self.sec_gallery, "registry": self.sec_registry, "faq": self.sec_faq, "rsvp": self.sec_rsvp}
+        return {p: makers[p]() for p in self.pages}
+
     def build(self):
         o = self.o
         if not (self.p1 and self.p2):
@@ -653,12 +658,29 @@ class Site:
         (self.out / "css" / "style.css").write_text(css)
         shutil.copy2(TEMPLATE / "site.js", self.out / "js" / "site.js")
 
-        pages = {"index": self.index, "details": self.details, "venue": self.venue,
-                 "accommodation": self.accommodation, "gallery": self.gallery_page,
-                 "registry": self.registry, "faq": self.faq, "rsvp": self.rsvp}
-        (self.out / "index.html").write_text(pages["index"]())
-        for p in self.pages:
-            (self.out / f"{p}.html").write_text(pages[p]())
+        secs = self.sections()
+        if self.single:
+            parts = [self.home_top()]
+            for i, (p, sec) in enumerate(secs.items()):
+                strip = ""  # the date/venue strip already appears under the hero
+                intro = f'        <p class="intro">{sec["intro"]}</p>\n' if sec["intro"] else ""
+                parts.append(f"""
+    <section id="{p}" class="one-sec{' one-sec-alt' if i % 2 == 0 else ''}">
+      <div class="sec-head{self.reveal}">
+        <p class="hero-monogram">{sec['eyebrow']}</p>
+        <h2>{sec['title']}</h2>
+        <div class="divider"><span>&#10070;</span></div>
+{intro}      </div>
+{strip}{sec['html']}    </section>""")
+            (self.out / "index.html").write_text(self.layout("index", "", "".join(parts)))
+        else:
+            (self.out / "index.html").write_text(self.layout("index", "", self.home_top() + self.home_cards()))
+            for p, sec in secs.items():
+                body = self.page_hero(sec["eyebrow"], sec["title"], sec["intro"])
+                if p == "details":
+                    body += self.info_strip()
+                body += f'\n    <section class="section page-body">\n{sec["html"]}    </section>'
+                (self.out / f"{p}.html").write_text(self.layout(p, self.t["nav"][p], body))
 
         domain = ((o.get("domain") or {}).get("name") or "").strip().lower()
         domain = re.sub(r"^https?://", "", domain).strip("/")
@@ -688,7 +710,9 @@ def main():
     warnings = site.build()
 
     print(f"Built {slug} → {out.relative_to(Path.cwd()) if out.is_relative_to(Path.cwd()) else out}")
-    print(f"Pages: index, {', '.join(site.pages)}  ·  photos: {len(site.gallery)}")
+    layout = "one-page scroll" if site.single else "multi-page"
+    print(f"Layout: {layout}  ·  intro: {site.intro}  ·  scroll animations: {'on' if site.animate else 'off'}")
+    print(f"Sections: {', '.join(site.pages)}  ·  photos: {len(site.gallery)}")
     if warnings:
         print("\nChecklist:")
         for w in warnings:

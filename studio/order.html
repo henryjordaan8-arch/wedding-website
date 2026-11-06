@@ -146,6 +146,27 @@
                 <div class="font-opt"><input type="radio" id="f3" name="fonts" value="romantic" data-path="style.fonts" data-label="Lettering"><label for="f3"><span style="font-family:'Great Vibes',cursive;font-size:1.9rem;">Anna &amp; Pieter</span><small>Romantic script</small></label></div>
               </div>
             </div>
+            <div class="field">
+              <span class="label">Layout</span>
+              <div class="font-options choice-2">
+                <div class="font-opt"><input type="radio" id="l1" name="layout" value="multi" data-path="style.layout" data-label="Layout" checked><label for="l1"><span class="lay lay-multi" aria-hidden="true"><i></i><i></i><i></i></span><b>Separate pages</b><small>A menu with Details, Venue, RSVP&hellip; each on its own page. Classic and tidy.</small></label></div>
+                <div class="font-opt"><input type="radio" id="l2" name="layout" value="single" data-path="style.layout" data-label="Layout"><label for="l2"><span class="lay lay-single" aria-hidden="true"><i></i></span><b>One-page scroll</b><small>Everything on one flowing page &mdash; guests just keep scrolling. Great on phones.</small></label></div>
+              </div>
+            </div>
+            <div class="field">
+              <span class="label">Opening animation <span class="hint" style="display:inline;">(plays once when guests first open the website)</span></span>
+              <div class="font-options">
+                <div class="font-opt"><input type="radio" id="o1" name="intro" value="envelope" data-path="style.intro" data-label="Opening animation" checked><label for="o1"><span class="op op-env" aria-hidden="true"><i></i><em></em></span><b>Envelope</b><small>Guests tap the wax seal and your invitation slides out</small></label></div>
+                <div class="font-opt"><input type="radio" id="o2" name="intro" value="monogram" data-path="style.intro" data-label="Opening animation"><label for="o2"><span class="op op-mono" aria-hidden="true">A<span>&amp;</span>P</span><b>Monogram</b><small>Your initials and names gently appear, then fade into the site</small></label></div>
+                <div class="font-opt"><input type="radio" id="o3" name="intro" value="none" data-path="style.intro" data-label="Opening animation"><label for="o3"><span class="op op-none" aria-hidden="true">&mdash;</span><b>None</b><small>Straight to the website</small></label></div>
+              </div>
+              <p class="fs-note" style="margin:0.6rem 0 0;"><a data-cfg-href="demoEnvelope" href="#" target="_blank" rel="noopener">See the envelope</a> &middot; <a data-cfg-href="demoMonogram" href="#" target="_blank" rel="noopener">See the monogram</a></p>
+            </div>
+            <div class="field">
+              <div class="checks" style="grid-template-columns:1fr;">
+                <label><input type="checkbox" value="yes" data-path="style.animations" data-label="Scroll animations" checked> <span><strong>Gentle scroll animations</strong> &mdash; sections softly fade in as guests scroll</span></label>
+              </div>
+            </div>
             <div class="row">
               <div class="field"><label for="headline">Headline (optional)<span class="hint">Default: your two names</span></label><input type="text" id="headline" data-path="style.headline" data-label="Headline"></div>
               <div class="field"><label for="tagline">Line under the names (optional)<span class="hint">Default: &ldquo;are getting married!&rdquo;</span></label><input type="text" id="tagline" data-path="style.tagline" data-label="Tagline"></div>

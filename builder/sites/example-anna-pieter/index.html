@@ -8,12 +8,30 @@
   <meta property="og:title" content="Anna &amp; Pieter">
   <meta property="og:description" content="Anna &amp; Pieter &middot; 10 April 2027 &middot; Oak Valley Estate, Stellenbosch">
   <meta property="og:image" content="images/hero.jpg">
+  <script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('openingSeen')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('opening-seen')}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="opening opening-envelope" id="opening" aria-hidden="false">
+    <div class="env-stage">
+      <div class="env">
+        <div class="env-back"></div>
+        <div class="env-letter">
+          <p class="env-small">Together with their families</p>
+          <p class="env-names">Anna <span class="amp">&amp;</span> Pieter</p>
+          <p class="env-date">10 April 2027</p>
+        </div>
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+        <button type="button" class="env-seal" id="opening-open" aria-label="Tap to open">A<span>&amp;</span>P</button>
+      </div>
+      <p class="env-hint">Tap to open</p>
+    </div>
+    <button type="button" class="opening-skip" id="opening-skip">Skip</button>
+  </div>
 
   <header class="site-header">
     <div class="header-inner">
@@ -36,8 +54,8 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero">
+  <main id="top">
+    <section class="hero home-hero">
       <h1 class="names" style="font-size:clamp(3rem, 6.8vw, 5.2rem);">Anna <span class="names-amp">&amp;</span> Pieter</h1>
       <p class="tagline">are getting married!</p>
       <p class="event-line"><strong>10 April 2027</strong> &middot; Oak Valley Estate, Stellenbosch</p>
@@ -68,9 +86,9 @@
       </div>
     </div>
 
-    <section class="section">
+    <section class="section reveal">
       <div class="container">
-        <h2 class="section-title" style="text-align:center;">Welcome</h2>
+        <h2 class="section-title center">Welcome</h2>
         <div class="divider"><span>&#10070;</span></div>
         <p class="intro">We are so excited to celebrate our wedding day with the people we love most. Here you'll find everything you need to know about the day &mdash; from the programme and venue to places to stay. Have a look around, and don't forget to RSVP!</p>
       </div>
@@ -78,7 +96,7 @@
 
     <section class="section section-alt">
       <div class="container">
-        <div class="card-grid">
+        <div class="card-grid reveal">
           <a href="details.html" class="card"><div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4M7.5 13h3M13.5 13h3M7.5 16.5h3"/></svg></div><h3>Details</h3><p class="muted" style="font-size:0.95rem;">Ceremony, reception &amp; programme.</p></a>
           <a href="venue.html" class="card"><div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></div><h3>Venue</h3><p class="muted" style="font-size:0.95rem;">How to get there.</p></a>
           <a href="accommodation.html" class="card"><div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20.5h18M5 20.5V8.5l7-4.5 7 4.5v12M9.5 20.5v-5h5v5M8.5 11h1M14.5 11h1"/></svg></div><h3>Stay</h3><p class="muted" style="font-size:0.95rem;">Places to stay nearby.</p></a>

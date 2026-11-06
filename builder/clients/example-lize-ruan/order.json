@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "package": "essential",
+  "slug": "example-lize-ruan",
+  "couple": {
+    "partner1": "Lize",
+    "partner2": "Ruan",
+    "email": "lize.ruan@example.com",
+    "phone": "072 000 1111"
+  },
+  "wedding": {
+    "date": "2027-10-23",
+    "ceremony_time": "16:00",
+    "venue": "Die Woud",
+    "town": "Magaliesburg",
+    "address": "Die Woud, Magaliesburg",
+    "reception_venue": "",
+    "dress_code": "Semi-formeel",
+    "dress_notes": "Die seremonie is buite op die gras — gemaklike skoene word aanbeveel.",
+    "rsvp_deadline": "2027-09-01"
+  },
+  "programme": [
+    {
+      "time": "15:30",
+      "title": "Gaste arriveer",
+      "note": ""
+    },
+    {
+      "time": "16:00",
+      "title": "Seremonie",
+      "note": "Onder die bome"
+    },
+    {
+      "time": "16:45",
+      "title": "Canapés en drankies",
+      "note": ""
+    },
+    {
+      "time": "18:30",
+      "title": "Aandete en toesprake",
+      "note": ""
+    },
+    {
+      "time": "20:30",
+      "title": "Eerste dans",
+      "note": ""
+    }
+  ],
+  "style": {
+    "language": "af",
+    "palette": "sage",
+    "fonts": "modern",
+    "layout": "single",
+    "intro": "monogram",
+    "animations": true,
+    "headline": "",
+    "tagline": "",
+    "welcome": "Ons kan nie wag om ons groot dag saam met julle in die Magaliesberg te vier nie! Hier vind julle al die besonderhede — van die program tot plekke om te bly."
+  },
+  "pages": [
+    "details",
+    "venue",
+    "accommodation",
+    "gallery",
+    "faq",
+    "rsvp"
+  ],
+  "accommodation": [
+    {
+      "name": "Bergsig Gastehuis",
+      "phone": "014 000 0000",
+      "email": "",
+      "website": "",
+      "note": "5 minute van die venue"
+    },
+    {
+      "name": "Valley Lodge",
+      "phone": "",
+      "email": "",
+      "website": "example.com",
+      "note": "Ontbyt ingesluit"
+    }
+  ],
+  "registry": {
+    "message": "",
+    "links": [],
+    "bank_details": ""
+  },
+  "faqs": [
+    {
+      "q": "Mag ek 'n metgesel saambring?",
+      "a": "Metgeselle is welkom indien hulle op jou uitnodiging genoem word."
+    },
+    {
+      "q": "Is kinders welkom?",
+      "a": "Ons is lief vir julle kleintjies, maar dié dag is net vir volwassenes."
+    }
+  ],
+  "rsvp": {
+    "method": "website",
+    "google_form_url": "",
+    "email": "",
+    "questions": [
+      "guests",
+      "dietary",
+      "song"
+    ]
+  },
+  "photos": {
+    "link": "",
+    "gallery_lock": []
+  },
+  "domain": {
+    "name": "lizeenruan.co.za",
+    "owned": "no"
+  },
+  "session": {
+    "format": "Video call",
+    "availability": "Saterdagoggende"
+  },
+  "notes": "Demo order for the one-page layout."
+}

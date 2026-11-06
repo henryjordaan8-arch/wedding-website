@@ -53,6 +53,10 @@ Options from the questionnaire:
 - `style.palette`: `navy`, `burgundy`, `sage`, `dusty-blue`, `blush`, `terracotta`, `classic`
 - `style.fonts`: `classic` (Playfair), `modern` (Cormorant), `romantic` (script names)
 - `style.language`: `en`, `af`
+- `style.layout`: `multi` (separate pages with a menu) or `single` (one scrolling page, menu jumps to sections)
+- `style.intro`: `envelope` (tap the wax seal, the letter slides out), `monogram` (initials and names fade in) or `none`.
+  It plays on the home page once per visit, and is skipped for visitors who have "reduce motion" switched on.
+- `style.animations`: `true` makes sections fade in gently as guests scroll
 
 Palettes, fonts and all fixed wording (English and Afrikaans) are at the top of `build.py`. The page
 styling is in `template/style.css` and the behaviour is in `template/site.js`.
@@ -64,5 +68,8 @@ styling is in `template/style.css` and the behaviour is in `template/site.js`.
   Pages repo (or Netlify) and point the domain's DNS at it.
 
 ## Example
-`clients/example-anna-pieter/` is a demo order with placeholder photos. Its output is in
-`sites/example-anna-pieter/`.
+Demo orders with placeholder photos:
+- `clients/example-anna-pieter/`: English, navy, separate pages, envelope opening
+- `clients/example-lize-ruan/`: Afrikaans, sage, one-page scroll, monogram opening
+
+Their output is in `sites/`. The sales page links to them as live demos.
