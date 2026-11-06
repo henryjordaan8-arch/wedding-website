@@ -30,7 +30,7 @@ Build the site with minimal back-and-forth:
    - 3–5 suggestions for their **developer session** (Essential includes one; Bespoke includes three).
 
 Package rules: Essential (R900) gets 15 palettes, 8 lettering styles, the envelope / card / monogram openings,
-up to 15 photos, one language and 1 developer session. Bespoke (R2 200) adds the Bespoke-only features: the doors and curtain openings, up to 40
+up to 15 photos, one language and 1 developer session. Bespoke (R1 999) adds the Bespoke-only features: the doors and curtain openings, up to 40
 photos, both languages, exact custom colours and fonts, extra pages, special features, 3 sessions and 12 months online.
 The form locks these for Essential, and `build.py` falls back (with a checklist note) if an Essential order asks for them.
 Both packages include the couple's web address (e.g. .co.za) and hosting at our cost for as long as the package keeps the site
