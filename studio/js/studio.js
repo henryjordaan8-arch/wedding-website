@@ -5,8 +5,8 @@
    =========================================================== */
 const STUDIO = {
   brandName: 'Ever After Sites',
-  essentialPrice: 'R1 499',
-  bespokePrice: 'R4 999',
+  essentialPrice: 'R900',
+  bespokePrice: 'R1 600',
   extraSessionPrice: 'R450',      // optional add-on: extra session with the developer
   essentialTurnaround: '7 days',
   bespokeTurnaround: '3–4 weeks',
@@ -16,7 +16,7 @@ const STUDIO = {
   liveExample: 'https://henryenmaryketrou.co.za',
 
   // Where the order form is sent. Easiest free option:
-  //   'https://formsubmit.co/your@email.com'  (confirm the first email they send you)
+  //   'https://formsubmit.co/ajax/your@email.com'  (send one test order, then click 'Activate' in the email)
   // Leave empty to fall back to opening the client's email app with the answers.
   formEndpoint: ''
 };
@@ -76,21 +76,122 @@ document.addEventListener('DOMContentLoaded', () => {
   if (form) setupOrderForm(form);
 });
 
+/* ---------- Order form ---------- */
+function setPath(obj, path, value) {
+  const keys = path.split('.');
+  let o = obj;
+  keys.slice(0, -1).forEach((k) => { o = o[k] = o[k] || {}; });
+  o[keys[keys.length - 1]] = value;
+}
+
+function getPath(obj, path) {
+  return path.split('.').reduce((o, k) => (o ? o[k] : undefined), obj);
+}
+
+function setupRepeaters(form) {
+  form.querySelectorAll('.repeater').forEach((rep) => {
+    const first = rep.querySelector('.rep-row, .rep-card');
+    const blank = first.cloneNode(true);
+    blank.querySelectorAll('input, textarea').forEach((el) => { el.value = ''; el.removeAttribute('value'); });
+    const max = Number(rep.dataset.max || 50);
+    const addBtn = rep.querySelector('.rep-add');
+    const refresh = () => {
+      addBtn.hidden = rep.querySelectorAll('.rep-row, .rep-card').length >= max;
+    };
+    addBtn.addEventListener('click', () => {
+      const row = blank.cloneNode(true);
+      addBtn.before(row);
+      row.querySelector('input, textarea')?.focus();
+      refresh();
+    });
+    rep.addEventListener('click', (e) => {
+      const btn = e.target.closest('.rep-remove');
+      if (!btn) return;
+      btn.closest('.rep-row, .rep-card').remove();
+      refresh();
+    });
+    refresh();
+  });
+}
+
+/* Turn the answers into the build file that builder/build.py reads */
+function collectOrder(form, bespoke) {
+  const order = { schema: 1, submitted: new Date().toISOString() };
+  const skip = (el) => !bespoke && el.closest('.bespoke-only');
+
+  form.querySelectorAll('[data-path]').forEach((el) => {
+    if (skip(el) || el.closest('.repeater')) return;
+    const path = el.dataset.path;
+    if (el.type === 'checkbox') {
+      const list = getPath(order, path) || [];
+      if (el.checked) list.push(el.value);
+      setPath(order, path, list);
+    } else if (el.type === 'radio') {
+      if (el.checked) setPath(order, path, el.value);
+    } else {
+      setPath(order, path, el.value.trim());
+    }
+  });
+
+  form.querySelectorAll('.repeater').forEach((rep) => {
+    if (skip(rep)) return;
+    const items = [...rep.querySelectorAll('.rep-row, .rep-card')].map((row) => {
+      const item = {};
+      row.querySelectorAll('[data-key]').forEach((el) => { item[el.dataset.key] = el.value.trim(); });
+      return item;
+    }).filter((item) => Object.values(item).some(Boolean));
+    setPath(order, rep.dataset.repeat, items);
+  });
+
+  // FAQ rows without an answer are left off the website
+  order.faqs = (order.faqs || []).filter((f) => f.q && f.a);
+  return order;
+}
+
+/* Human-readable version for the email */
+function summarise(form, bespoke) {
+  const lines = [];
+  const seen = new Set();
+  form.querySelectorAll('[data-label]').forEach((el) => {
+    if (!bespoke && el.closest('.bespoke-only')) return;
+    const label = el.dataset.label;
+    if (seen.has(label)) return;
+    if (el.classList.contains('repeater')) {
+      seen.add(label);
+      const rowsText = [...el.querySelectorAll('.rep-row, .rep-card')]
+        .map((row) => [...row.querySelectorAll('[data-key]')].map((i) => i.value.trim()).filter(Boolean).join(' · '))
+        .filter(Boolean);
+      if (rowsText.length) lines.push(`${label}:\n  - ${rowsText.join('\n  - ')}`);
+      return;
+    }
+    if (el.closest('.repeater')) return;
+    seen.add(label);
+    let value;
+    if (el.type === 'checkbox' || el.type === 'radio') {
+      value = [...form.querySelectorAll(`[data-label="${label}"]:checked`)].map((c) => c.value).join(', ');
+    } else {
+      value = el.value.trim();
+    }
+    if (value) lines.push(`${label}: ${value}`);
+  });
+  return lines.join('\n');
+}
+
 function setupOrderForm(form) {
   const wrap = document.getElementById('order-wrap');
   const status = document.getElementById('form-status');
+  setupRepeaters(form);
 
-  // Preselect package from ?package=bespoke
   const wanted = new URLSearchParams(location.search).get('package');
   if (wanted) {
     const radio = form.querySelector(`input[name="package"][value="${wanted}"]`);
     if (radio) radio.checked = true;
   }
 
+  const isBespoke = () => form.querySelector('input[name="package"]:checked')?.value === 'bespoke';
   const syncPackage = () => {
-    const bespoke = form.querySelector('input[name="package"]:checked')?.value === 'bespoke';
+    const bespoke = isBespoke();
     wrap.classList.toggle('is-bespoke', bespoke);
-    // Hidden bespoke questions must not block submission of the Essential form
     form.querySelectorAll('.bespoke-only [data-required]').forEach((el) => { el.required = bespoke; });
   };
   form.querySelectorAll('input[name="package"]').forEach((r) => r.addEventListener('change', syncPackage));
@@ -98,44 +199,29 @@ function setupOrderForm(form) {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const bespoke = wrap.classList.contains('is-bespoke');
-
-    // Collect answers, skipping hidden bespoke-only questions for Essential
-    const lines = [];
-    const data = new FormData();
-    const seen = new Set();
-    form.querySelectorAll('input, select, textarea').forEach((el) => {
-      if (!el.name || seen.has(el.name)) return;
-      if (!bespoke && el.closest('.bespoke-only')) return;
-      seen.add(el.name);
-      let value;
-      if (el.type === 'checkbox' || el.type === 'radio') {
-        value = [...form.querySelectorAll(`[name="${el.name}"]:checked`)].map((c) => c.value).join(', ');
-      } else {
-        value = el.value.trim();
-      }
-      if (!value) return;
-      const label = el.dataset.label || el.name;
-      lines.push(`${label}: ${value}`);
-      data.append(label, value);
-    });
-
-    const couple = form.querySelector('[name="partner1"]').value.trim() + ' & ' + form.querySelector('[name="partner2"]').value.trim();
+    const bespoke = isBespoke();
+    const order = collectOrder(form, bespoke);
+    const summary = summarise(form, bespoke);
+    const buildFile = JSON.stringify(order, null, 2);
+    const couple = `${order.couple.partner1} & ${order.couple.partner2}`;
     const subject = `New ${bespoke ? 'Bespoke' : 'Essential'} wedding website order — ${couple}`;
-    data.append('_subject', subject);
-    data.append('_template', 'table');
-    data.append('_captcha', 'false');
 
     if (STUDIO.formEndpoint) {
       status.className = 'form-status';
       status.textContent = 'Sending…';
+      const data = new FormData();
+      data.append('_subject', subject);
+      data.append('_template', 'box');
+      data.append('_captcha', 'false');
+      data.append('Answers', summary);
+      data.append('Build file (paste into the builder)', buildFile);
       try {
         const res = await fetch(STUDIO.formEndpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-        if (!res.ok) throw new Error(res.statusText);
-        form.reset();
-        syncPackage();
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok || String(out.success) === 'false') throw new Error(out.message || res.statusText);
         status.className = 'form-status ok';
-        status.textContent = `Thank you! Your answers are in. We'll be in touch within 1–2 working days.`;
+        status.textContent = "Thank you! Your answers are in. We'll be in touch within 1–2 working days.";
+        form.querySelector('button[type="submit"]').disabled = true;
         return;
       } catch (err) {
         status.className = 'form-status err';
@@ -143,7 +229,7 @@ function setupOrderForm(form) {
       }
     }
 
-    const body = encodeURIComponent(lines.join('\n\n'));
-    location.href = `mailto:${STUDIO.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
+    const body = `${summary}\n\n----- BUILD FILE (please leave this part as is) -----\n${JSON.stringify(order)}`;
+    location.href = `mailto:${STUDIO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 }

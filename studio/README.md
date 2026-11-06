@@ -4,8 +4,8 @@ The website you use to sell wedding websites. It's plain HTML/CSS/JS, so there's
 
 | File | What it is |
 |------|------------|
-| `index.html` | Sales page: hero, screenshots of a real site, features, the two packages, comparison, Bespoke sessions, FAQ |
-| `order.html` | Client order form. Essential shows the basic questions. Choosing **Bespoke** also shows the in-depth questionnaire. |
+| `index.html` | Sales page: hero, screenshots of a real site, features, the two packages (R900 / R1 600), comparison, Bespoke sessions, FAQ |
+| `order.html` | Client questionnaire. It emails a readable summary plus a JSON **build file** for `builder/`. Choosing **Bespoke** adds the in-depth questions. |
 | `js/studio.js` | **Edit the `STUDIO` object at the top** to set the brand name, prices, turnaround times, email, WhatsApp and form endpoint |
 | `css/studio.css` | Colours & fonts are in `:root` at the top |
 | `images/examples/` | Screenshots of henryenmaryketrou.co.za used as examples |
@@ -13,7 +13,7 @@ The website you use to sell wedding websites. It's plain HTML/CSS/JS, so there's
 ## Before going live
 1. Set `email`, `whatsapp` and the prices in `js/studio.js`.
 2. Set `formEndpoint` so orders arrive in your inbox, e.g.
-   `https://formsubmit.co/your@email.com`. The first submission sends a
+   `https://formsubmit.co/ajax/your@email.com`. The first submission sends a
    confirmation email to that address. Without an endpoint, the form opens the
    client's email app with their answers filled in. Long Bespoke answers can get
    cut off this way, so an endpoint is recommended.

@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "package": "essential",
+  "slug": "example-anna-pieter",
+  "couple": { "partner1": "Anna", "partner2": "Pieter", "email": "anna.pieter@example.com", "phone": "082 123 4567" },
+  "wedding": {
+    "date": "2027-04-10", "ceremony_time": "15:30",
+    "venue": "Oak Valley Estate", "town": "Stellenbosch", "address": "Oak Valley Estate, Stellenbosch",
+    "reception_venue": "", "dress_code": "Semi-formal",
+    "dress_notes": "Garden-friendly shoes recommended — the ceremony is on the lawn.",
+    "rsvp_deadline": "2027-02-28"
+  },
+  "programme": [
+    { "time": "15:00", "title": "Guests arrive", "note": "" },
+    { "time": "15:30", "title": "Ceremony", "note": "Under the old oak tree" },
+    { "time": "16:15", "title": "Canapés & drinks", "note": "" },
+    { "time": "18:30", "title": "Dinner & speeches", "note": "" },
+    { "time": "20:30", "title": "First dance", "note": "" }
+  ],
+  "style": { "language": "en", "palette": "navy", "fonts": "romantic", "headline": "", "tagline": "", "welcome": "" },
+  "pages": ["details", "venue", "accommodation", "gallery", "registry", "faq", "rsvp"],
+  "accommodation": [
+    { "name": "Oak Valley Cottages", "phone": "021 000 0001", "email": "stay@example.com", "website": "", "note": "On the estate — 2 minutes' walk" },
+    { "name": "Stellenbosch Inn", "phone": "021 000 0002", "email": "", "website": "example.com", "note": "10 minutes by car" }
+  ],
+  "registry": {
+    "message": "",
+    "links": [ { "title": "Home registry", "url": "https://example.com/registry" } ],
+    "bank_details": "Honeymoon fund\nBank: Example Bank\nAccount: 000 000 000\nReference: Your name"
+  },
+  "faqs": [
+    { "q": "Can I bring a plus-one?", "a": "Plus-ones are welcome when named on your invitation." },
+    { "q": "Are children welcome?", "a": "We love your little ones, but this will be an adults-only celebration." },
+    { "q": "Is there parking?", "a": "Yes, free parking is available at the estate." }
+  ],
+  "rsvp": { "method": "website", "google_form_url": "", "email": "", "questions": ["guests", "dietary", "song", "message"] },
+  "photos": { "link": "", "gallery_lock": [ { "question": "What is our dog's name?", "answer": "Biscuit" } ] },
+  "domain": { "name": "annaandpieter.co.za", "owned": "no" },
+  "session": { "format": "Video call", "availability": "Weekday evenings" },
+  "notes": "This is a demo order used to test the builder."
+}
