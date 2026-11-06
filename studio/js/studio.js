@@ -7,7 +7,7 @@ const STUDIO = {
   brandName: 'Ever After Sites',
   essentialPrice: 'R900',
   bespokePrice: 'R1 600',
-  extraSessionPrice: 'R450',      // optional add-on: extra session with the developer
+  extraSessionPrice: 'R350',      // optional add-on: extra session with the developer
   essentialTurnaround: '7 days',
   bespokeTurnaround: '3–4 weeks',
 

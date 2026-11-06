@@ -30,7 +30,7 @@ Build the site with minimal back-and-forth:
    - 3–5 suggestions for their **developer session** (Essential includes one; Bespoke includes three).
 
 Package rules: Essential (R900) gets 15 palettes, 8 lettering styles, the envelope / card / monogram openings,
-up to 12 photos, one language and 1 developer session. Bespoke-only features are the doors and curtain openings, up to 40
+up to 15 photos, one language and 1 developer session. Bespoke-only features are the doors and curtain openings, up to 40
 photos, both languages, exact custom colours and fonts, extra pages, special features, 3 sessions and 12 months online.
 The form locks these for Essential, and `build.py` falls back (with a checklist note) if an Essential order asks for them.
 

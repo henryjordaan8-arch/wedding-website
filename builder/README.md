@@ -60,7 +60,7 @@ Options from the questionnaire:
   (curtains draw apart), `card` (save-the-date card flips over), `monogram` (initials and names fade in) or `none`.
   It plays on the home page once per visit, and is skipped for visitors who have "reduce motion" switched on.
 - `style.animations`: `true` makes sections fade in gently as guests scroll
-- `photos.amount`: `one` (home photo only, no gallery), `few` (up to 12), `lots` (up to 40)
+- `photos.amount`: `one` (home photo only, no gallery), `few` (up to 15), `lots` (up to 40)
 - `photos.hero_style`: `framed` (under the names), `full` (full-screen behind the names), `none`
 - `photos.home_strip`: `true` adds a row of 4 photos under the welcome message
 

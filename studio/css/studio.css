@@ -792,3 +792,58 @@ p.bespoke-only-inline { display: none; }
 .upsell span { flex: 1 1 260px; }
 .upsell-btn { background: var(--gold); color: var(--dark); border: 0; border-radius: 2px; padding: 0.55rem 1rem; font: 600 0.75rem var(--font-body); letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
 .upsell-btn:hover { background: var(--gold-light); }
+
+/* Own domain section */
+.domain-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3.5rem; align-items: center; }
+.domain-points li { position: relative; padding-left: 1.6rem; margin-bottom: 0.9rem; color: var(--ink-2); }
+.domain-points li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 8px; height: 8px; border: 1px solid var(--gold); transform: rotate(45deg); }
+.domain-points strong { color: var(--navy); font-weight: 600; }
+.browsers { display: grid; gap: 1.6rem; }
+.browser { margin: 0; }
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px -18px rgba(20, 34, 58, 0.35);
+}
+.dots { display: flex; gap: 5px; flex: none; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.url {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: var(--ivory-2);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.url svg { width: 15px; height: 15px; flex: none; fill: none; stroke: #2f5d4a; stroke-width: 1.8; stroke-linecap: round; }
+.browser figcaption { margin-top: 0.5rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); padding-left: 0.3rem; }
+.browser-meh { opacity: 0.6; filter: grayscale(1); }
+.browser-meh .url { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: rgba(176, 87, 79, 0.6); display: block; }
+.browser-yes .browser-bar { border-color: var(--gold-light); border-radius: 10px 10px 0 0; box-shadow: none; }
+.browser-yes .url { background: var(--white); border: 1px solid var(--gold-light); color: var(--navy); font-size: 1.02rem; }
+.browser-yes .url b { font-weight: 600; letter-spacing: 0.01em; }
+.browser-body {
+  border: 1px solid var(--gold-light);
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  padding: 2.4rem 1rem 2.2rem;
+  text-align: center;
+  background: radial-gradient(ellipse at top, var(--white), var(--ivory-2));
+  box-shadow: var(--shadow);
+}
+.bb-names { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.6rem); color: var(--navy); margin: 0; line-height: 1.1; }
+.bb-names span { color: var(--gold); font-style: italic; }
+.bb-date { margin: 0.4rem 0 0; color: var(--ink-2); font-size: 0.9rem; letter-spacing: 0.06em; }
+@media (max-width: 900px) { .domain-grid { grid-template-columns: 1fr; gap: 2.4rem; } }
+.domain-grid > *, .browsers, .browser, .browser-bar { min-width: 0; }

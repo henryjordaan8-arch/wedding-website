@@ -156,7 +156,7 @@ ICONS = {
     "dress": '<path d="M9 3l3 3 3-3M9 3L6 6l2 3-2 12h12L16 9l2-3-3-3"/>',
 }
 INTROS = {"none", "envelope", "monogram", "doors", "curtain", "card"}
-PHOTO_LIMITS = {"one": 0, "few": 12, "lots": 40}
+PHOTO_LIMITS = {"one": 0, "few": 15, "lots": 40}
 # Options reserved for the Bespoke package (the order form locks them for Essential too)
 BESPOKE_ONLY = {"intro": {"doors", "curtain"}, "photo_amount": {"lots"}, "language": {"both"}}
 PAGE_ORDER = ["details", "venue", "accommodation", "gallery", "registry", "faq", "rsvp"]
@@ -294,7 +294,7 @@ class Site:
         ph = order.get("photos") or {}
         self.photo_amount = ph.get("amount") if ph.get("amount") in PHOTO_LIMITS else ("lots" if self.bespoke else "few")
         if not self.bespoke and self.photo_amount in BESPOKE_ONLY["photo_amount"]:
-            self.warn("Up to 40 photos is a Bespoke option — capped at 12 for this Essential order.")
+            self.warn("Up to 40 photos is a Bespoke option — capped at 15 for this Essential order.")
             self.photo_amount = "few"
         self.hero_style = ph.get("hero_style") if ph.get("hero_style") in {"framed", "full", "none"} else "framed"
         self.home_strip = bool(ph.get("home_strip"))
