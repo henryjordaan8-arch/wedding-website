@@ -6,7 +6,7 @@
 const STUDIO = {
   brandName: 'Ever After Sites',
   essentialPrice: 'R900',
-  bespokePrice: 'R1 600',
+  bespokePrice: 'R2 200',
   extraSessionPrice: 'R350',      // optional add-on: extra session with the developer
   essentialTurnaround: '7 days',
   bespokeTurnaround: '3–4 weeks',
@@ -25,7 +25,7 @@ const STUDIO = {
   formEndpoint: ''
 };
 
-// Price difference between the packages, e.g. 'R700' (shown as "only R700 more")
+// Price difference between the packages, e.g. 'R1 300' (shown as "only R1 300 more")
 const toNumber = (price) => Number(String(price).replace(/[^0-9]/g, ''));
 STUDIO.upgradeDiff = 'R' + (toNumber(STUDIO.bespokePrice) - toNumber(STUDIO.essentialPrice)).toLocaleString('en-ZA').replace(/,/g, ' ');
 
